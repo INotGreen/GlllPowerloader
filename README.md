@@ -13,12 +13,12 @@
 
 # 用法：
 
-## 提前配置好nim和python3的环境，建议在windows下进行编译
+## 提前配置好nim和python3的环境，需要在windows下进行编译
 
 ## 用CobaltStrike生成一个stageless的Powershell脚本
 ![image](https://user-images.githubusercontent.com/89376703/165303519-bce20d59-6ffb-4f09-bcfb-15dfc8c04d5e.png)
 
-## 将Powershell脚本挂在公网，你也可以挂在pastebin或者Github上，或者你也可以本地起一个http服务，然后输入网址链接即可编译
+## 将Powershell脚本挂在公网，你也可以挂在pastebin(https://pastebin.com/)或者Github上，或者你也可以本地起一个http服务，然后输入网址链接即可编译
 
 ![image](https://user-images.githubusercontent.com/89376703/165304429-a801191f-3334-429f-80c4-27d74d475224.png)
 
