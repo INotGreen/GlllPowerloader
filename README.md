@@ -18,7 +18,7 @@
 ## 用CobaltStrike生成一个stageless的Powershell脚本
 ![image](https://user-images.githubusercontent.com/89376703/165303519-bce20d59-6ffb-4f09-bcfb-15dfc8c04d5e.png)
 
-## 将Powershell脚本挂在公网，你也可以挂在pastebin(https://pastebin.com/)或者Github上，或者你也可以本地起一个http服务，然后输入网址链接即可编译
+## 将Powershell脚本挂在公网，你也可以挂在pastebin(https://pastebin.com) 或者Github上，或者你也可以本地起一个http服务，然后输入网址链接即可编译
 
 ![image](https://user-images.githubusercontent.com/89376703/165304429-a801191f-3334-429f-80c4-27d74d475224.png)
 
@@ -27,7 +27,7 @@
 # 免杀效果：
 
 ### Karpersky
-仅弹计算器作演示，lasass dump暂时不考虑
+#### 仅弹计算器作演示，lasass dump暂时不考虑
 ![image](https://user-images.githubusercontent.com/89376703/165305458-d4a074d6-5adb-4cc6-9996-5d32abdc0b21.png)
 
 ### Windows Defender(win 2016)
