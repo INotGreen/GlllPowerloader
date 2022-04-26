@@ -8,7 +8,8 @@
 ## 2.避免了敏感API,比如说VirtualAlloc、VirtualProtect、CreatProcess、WriteProcessMemory
 
 ## 缺点：
-## 由于System.Management.Automation.dll存在兼容性问题，需要在有高版本的Powershell环境中才能运行，因此编译过后的二进制文件可能不能在win10/win2016以下的PC端运行。（我一直在尝试解决这个问题，如果你找到了解决方案，请马上与我联系）
+## 1.依赖于磁盘加载二进制文件
+## 2.由于System.Management.Automation.dll存在兼容性问题，需要在有高版本的Powershell环境中才能运行，因此编译过后的二进制文件可能不能在win10/win2016以下的PC端运行。（我一直在尝试解决这个问题，如果你找到了解决方案，请马上与我联系）
           
 
 # 用法：
