@@ -1,1 +1,3 @@
 # Gllllnimloader
+
+这是一个个nim的加载器，我用python将它进行了脚本化快速编译，和其它shellcode加载器不同的是，它是一个powershell的加载器，出于powershell语言的灵活性，Gllllnimloader可以加载任何形式上的powershell
