@@ -1,6 +1,15 @@
 # Gllllnimloader
 
-## 这是一个nim的加载器，我用Python将它进行了脚本化快速编译，和其它ShellCode加载器不同的是，它是一个PowerShell的加载器，出于PowerShell语言的灵活性，Gllllnimloader可以加载任何形式上的powershell
+## 简介：
+### 这是一个nim的加载器，我用Python将它进行脚本化快速编译，与其它ShellCode加载器不同的是，它是一个PowerShell的加载器，出于PowerShell语言的灵活性，Gllllnimloader可以加载任何形式上的powershell
+
+## 优点：
+## 1.能够无视卡巴斯基和Windows Defender的内存扫描 
+## 2.避免了敏感API,比如说VirtualAlloc、VirtualProtect、CreatProcess、WriteProcessMemory
+
+## 缺点：
+## 由于System.Management.Automation.dll存在兼容性问题，需要在有高版本的Powershell环境中才能运行，因此编译过后的二进制文件可能不能在win10/win2016以下的PC端运行。（我一直在尝试解决这个问题，如果你找到了解决方案，请马上与我联系）
+          
 
 # 用法：
 
