@@ -40,7 +40,7 @@
 
 
 # 项目赞助：
-### ![image](https://user-images.githubusercontent.com/89376703/165323770-c4e55fae-e747-47e0-8e17-57d1cb999741.png) ![image](https://user-images.githubusercontent.com/89376703/165323924-83bb3ea0-84d7-4d32-aac7-8b4ade884559.png)
+### ![image](https://user-images.githubusercontent.com/89376703/165323770-c4e55fae-e747-47e0-8e17-57d1cb999741.png) 
 # +知识星球学习免杀:
 
 ![image](https://user-images.githubusercontent.com/89376703/165324647-52f42926-cd0f-4da6-91cb-73bceffd5224.png)
