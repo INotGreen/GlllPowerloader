@@ -30,7 +30,7 @@
 # 免杀效果：
 
 ### Karpersky
-#### 仅弹计算器作演示，lasass dump暂时不考虑
+#### 仅弹计算器作演示，lsass dump暂时不考虑
 ![image](https://user-images.githubusercontent.com/89376703/165305458-d4a074d6-5adb-4cc6-9996-5d32abdc0b21.png)
 
 ### Windows Defender(win 2016)
