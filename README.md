@@ -3,6 +3,8 @@
 ## 简介：
 ### 这是一个nim的加载器，我用Python将它进行脚本化快速编译，与其它ShellCode加载器不同的是，它是一个PowerShell的加载器，出于PowerShell语言的灵活性，Gllllnimloader可以加载任何形式上的powershell
 
+# 视频教程：https://www.bilibili.com/video/BV1r541117nK/
+
 ## 优点：
 ## 1.能够无视卡巴斯基和Windows Defender的内存扫描 
 ## 2.避免了敏感API,比如说VirtualAlloc、VirtualProtect、CreatProcess、WriteProcessMemory
