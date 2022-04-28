@@ -93,7 +93,7 @@ def main(PowerShell_stub, stub, verbose):
                 print("[+] 将新存根保存到 stub.ps1")
                 sleep(1)
                 print("[+] 编译新存根...")             
-                os.system("powershell .\ps2exe.ps1 -inputFile 'stub.ps1' -iconFile {} -outputFile 'stub.exe' -runtime40 -lcid '' -MTA -noConsole -supportOS".format(Icon))               
+                os.system("powershell .\PSTOEXE.ps1 -inputFile 'stub.ps1' -iconFile {} -outputFile 'stub.exe' -runtime40 -lcid '' -MTA -noConsole -supportOS".format(Icon))               
                 #os.system("del stub.ps1")
           else:
                 print("没有该选项请重新输入:\n")
