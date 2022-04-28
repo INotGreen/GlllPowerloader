@@ -1,7 +1,7 @@
 # Gllllnimloader
 
 ## 简介：
-### 这是一个PowerShell的加载器，我用Python将它进行脚本化快速编译，与其它ShellCode加载器不同的是，它是一个PowerShell的加载器，出于PowerShell语言的灵活性，Gllllnimloader可以加载任何形式上的powershell
+### 这是一个PowerShell的加载器,分别有nim写的Automation和PSTOEXE两种加载方式，他们可以将PowerShell的源代码打包成exe，我用Python将它进行脚本化快速编译，由于PowerShell语言的灵活性，Gllllnimloader可以加载任何形式的PowerShell
 
 ## 视频教程：https://www.bilibili.com/video/BV1r541117nK/
 
