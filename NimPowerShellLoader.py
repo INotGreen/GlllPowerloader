@@ -94,7 +94,7 @@ def main(PowerShell_stub, stub, verbose):
                 sleep(1)
                 print("[+] 编译新存根...")             
                 os.system("powershell .\PSTOEXE.ps1 -inputFile 'stub.ps1' -iconFile {} -outputFile 'stub.exe' -runtime40 -lcid '' -MTA -noConsole -supportOS".format(Icon))               
-                #os.system("del stub.ps1")
+                os.system("del stub.ps1")
           else:
                 print("没有该选项请重新输入:\n")
                 return verbose
