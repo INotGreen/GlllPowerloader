@@ -14,8 +14,8 @@ graphical = """
   | |  | |\  | (_) | |_  | |_| | | |  __/  __/ | | |
  |___| |_| \_|\___/ \__|  \____|_|  \___|\___|_| |_| 
 
- bilibli:
- Github:
+ bilibli:https://www.bilibili.com/video/BV1HS4y1a7gu?spm_id_from=333.999.0.0
+ Github:https://github.com/INotGreen/Gllllnimloader
                                                                                                           
 """
 
