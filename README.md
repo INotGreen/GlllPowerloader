@@ -16,7 +16,7 @@
 
 # 用法：
 
-## 提前配置好nim和python3的环境，并且安装winim这个nim的第三方库(https://github.com/khchen/winim), 需要在windows下进行编译
+## 提前配置好nim、python3、mingw64的环境，并安装winim这个nim的第三方库(https://github.com/khchen/winim), 需要在windows下进行编译
 
 ## 用CobaltStrike生成一个stageless的Powershell脚本
 ![image](https://user-images.githubusercontent.com/89376703/165303519-bce20d59-6ffb-4f09-bcfb-15dfc8c04d5e.png)
