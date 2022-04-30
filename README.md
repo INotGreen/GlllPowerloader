@@ -16,7 +16,7 @@
 
 # 用法：
 
-## 提前配置好nim和python3的环境，需要在windows下进行编译
+## 提前配置好nim和python3的环境，并且安装winim这个nim的第三方库(https://github.com/khchen/winim), 需要在windows下进行编译
 
 ## 用CobaltStrike生成一个stageless的Powershell脚本
 ![image](https://user-images.githubusercontent.com/89376703/165303519-bce20d59-6ffb-4f09-bcfb-15dfc8c04d5e.png)
@@ -24,8 +24,14 @@
 ## 将Powershell脚本挂在公网，你也可以挂在pastebin(https://pastebin.com) 或者Github上，或者你也可以本地起一个http服务，然后输入网址链接即可编译
 
 ![image](https://user-images.githubusercontent.com/89376703/165304429-a801191f-3334-429f-80c4-27d74d475224.png)
+## 有两种PowerShell的打包方式
+![image](https://user-images.githubusercontent.com/89376703/166095301-609fd76b-3e8d-4330-a04e-59de4f8b9f6d.png)
 
-![image](https://user-images.githubusercontent.com/89376703/165304900-f276f5d0-4f76-4823-a5f3-a89df583ca9b.png)
+## 第一种
+![image](https://user-images.githubusercontent.com/89376703/166095373-50b4ccf3-1427-4522-b028-22ad57282c4b.png)
+## 注意第二种需要加一个ico格式的图标，将该图标放到同目录的文件夹下即可
+![image](https://user-images.githubusercontent.com/89376703/166095433-528c3d77-86d0-47c4-9a41-bb0d978b96fd.png)
+
 
 # 免杀效果：
 
