@@ -19,7 +19,6 @@ graphical = """
 
  bilibli:我不是格林
  Github:https://github.com/INotGreen/Gllllnimloader
- 开发者: 我不是格林、
 """
 Option_stub = """
 .------..------..------..------.     .------..------..------..------..------..------..------.
@@ -35,7 +34,7 @@ Option_stub = """
  4.远程反射dll(Invoke-ReflectivePEInjection)
  5.免杀套接字(Bypass Socket)
  6.密码抓取工具(Passwords Dumping Tools)
- 7.shellcode加密
+ 7.shellcode加密(ShellCode Encryption)
 """
 
 stub = """
