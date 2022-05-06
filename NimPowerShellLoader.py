@@ -123,7 +123,7 @@ def main(powershell_to_vbs,PowerShell_stub, stub, verbose):
                       print("[+] 将新存根保存到 stub.nim")
                       sleep(1)
                       print("[+] 编译新存根...")             
-                      os.system("nim c -r -d:mingw - -app:gui stub.nim")                 
+                      os.system("nim c --hints:off --warnings:off -d:danger -d:strip --opt:size --passc=-flto --passl=-flto --app:gui .\stub.nim")                 
                       os.system("del stub.nim")
                 if BypassAntivirus == "2":
                       Icon = input("请输入icon格式图标路径:")
