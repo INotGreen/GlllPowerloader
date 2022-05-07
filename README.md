@@ -47,9 +47,6 @@
 ## 1.不要上传任何包括但不仅限于VirusTotal的公网沙箱，如果我发现样本失效过快，会停止该项目的维护
 ## 2.此项目仅用于教育目的，禁止将该技术用于非法途径
 
-
-# 项目赞助：
-### ![image](https://user-images.githubusercontent.com/89376703/165323770-c4e55fae-e747-47e0-8e17-57d1cb999741.png) 
 # +知识星球学习免杀:
 
 ![image](https://user-images.githubusercontent.com/89376703/165324647-52f42926-cd0f-4da6-91cb-73bceffd5224.png)
