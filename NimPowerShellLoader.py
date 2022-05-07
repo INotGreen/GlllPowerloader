@@ -30,13 +30,6 @@ Option_stub = """
 
  1.免杀加载器(Bypass Loader)
  2.文件格式转换(File Format Conversion)
- 3.权限维持(Backdoor Persistence)
- 4.远程反射dll(Invoke-ReflectivePEInjection)
- 5.免杀套接字(Bypass Socket)
- 6.密码抓取工具(Passwords Dumping Tools)
- 7.shellcode加密(ShellCode Encryption)
-"""
-
 stub = """
 import winim/clr
 import base64
@@ -140,7 +133,7 @@ def main(powershell_to_vbs,PowerShell_stub, stub, verbose):
                 else:
                       return                                                                 
     if Options == "2":
-          print("1.ps1_to_vbs\n2.exe_vbs\n3.exe")
+          print("1.ps1_to_vbs")
           formatopions = input("<INOTGREEN>:")
           if formatopions == "1":
                   print("[+] 启用详细消息")
