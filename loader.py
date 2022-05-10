@@ -863,8 +863,8 @@ def main(stub, infile, outfile, key, process, method, no_randomize, verbose, dll
     else:
         sleep(1)
         print("[!] 存根编译失败！真的烦！")
-    #os.system("del stub.cpp")
-    #os.system("del Syscalls2.h")
+    os.system("del stub.cpp")
+    os.system("del Syscalls2.h")
 
 
 print(graphical[1:-1])
