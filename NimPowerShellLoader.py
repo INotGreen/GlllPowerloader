@@ -55,12 +55,6 @@ Option_stub = """
  
  1.免杀加载器(Bypass Loader)
  2.文件格式转换(File Format Conversion)
- 3.权限维持(Backdoor Persistence)
- 4.远程反射dll(Invoke-ReflectivePEInjection)
- 5.免杀套接字(Bypass Socket)
- 6.密码抓取工具(Passwords Dumping Tools)
- 7.shellcode加密解密(ShellCode EncryptionDecryptor)
- 8.nim自动化宏嵌入(Nim Automation Macro Embedding)
 """
 stub = """
 import winim/clr
@@ -197,10 +191,7 @@ def main(powershell_to_vbs,PowerShell_stub, stub, raw_stub,verbose):
         if Options == "2":
             while True:
                 print("1.ps1_to_vbs\n"
-                  "2.exe_vbs\n"
-                  "3.exe_hta\n"
-                  "4.exe_ps1\n"
-                  "5.ps1_to_exe")
+                  "2.ps1_to_exe")
                 formatopions = input("<INOTGREEN>:")
                 if formatopions == "1":
                     url = input("请输入网址：\n"
@@ -223,7 +214,7 @@ def main(powershell_to_vbs,PowerShell_stub, stub, raw_stub,verbose):
                     os.system("powershell .\Ps1ToVbs.ps1")
                     os.system("del Ps1ToVbs.ps1")
                     os.system("del stubps1tovbs.ps1")
-                if formatopions == "5":
+                if formatopions == "2":
                     Path = input("请输入文件路径:\n"
                     "<INOTEGREE>:")
                     Icon = input("请输入图标路径:\n"
