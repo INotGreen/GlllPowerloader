@@ -1,5 +1,5 @@
 # Gllllnimloader
-
+## nim加载模块暂时停止开放
 ## 该工具会持续更新，目前只做好第一个模块
 ## 简介：
 ### 这是一个PowerShell的加载器,分别有nim写的Automation和PSTOEXE两种加载方式，他们可以将PowerShell的源代码打包成exe，我用Python将它进行脚本化快速编译，由于PowerShell语言的灵活性，Gllllnimloader可以加载任何形式的PowerShell(感谢大佬对开源社区贡献的代码：https://github.com/MScholtes/PS2EXE)
