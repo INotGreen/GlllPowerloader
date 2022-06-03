@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-#Created by Matthew David (@icyguider)
 import sys, os, argparse, random, string
 from time import sleep
 
