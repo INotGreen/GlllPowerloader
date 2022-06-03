@@ -1,51 +1,90 @@
-# Gllllnimloader
-## Automation加载模块暂时停止开放
-## 该工具会持续更新，目前只做好第一个模块
-## 简介：
-### 这是一个PowerShell的加载器,分别有nim写的Automation和PSTOEXE两种加载方式，他们可以将PowerShell的源代码打包成exe，我用Python将它进行脚本化快速编译，由于PowerShell语言的灵活性，Gllllnimloader可以加载任何形式的PowerShell(感谢大佬对开源社区贡献的代码：https://github.com/MScholtes/PS2EXE)
+介绍：
 
-## 视频教程：https://www.bilibili.com/video/BV1r541117nK/
-
-## 优点：
-## 1.能够无视卡巴斯基和Windows Defender的内存扫描 
-## 2.避免了敏感API,比如说VirtualAlloc、VirtualProtect、CreatProcess、WriteProcessMemory
-
-## 缺点：
-## 1.依赖于磁盘加载二进制文件
-## 2.由于System.Management.Automation.dll存在兼容性问题，需要在有高版本的Powershell环境中才能运行，因此编译过后的二进制文件可能不能在win10/win2016以下的PC端运行。（我一直在尝试解决这个问题，如果你找到了解决方案，请马上与我联系）
-          
-
-# 用法：
-
-## 提前配置好nim、python3、mingw64的环境，并安装winim这个nim的第三方库(https://github.com/khchen/winim), 需要在windows下进行编译
-
-## 用CobaltStrike生成一个stageless的Powershell脚本
-![image](https://user-images.githubusercontent.com/89376703/165303519-bce20d59-6ffb-4f09-bcfb-15dfc8c04d5e.png)
-
-## 将Powershell脚本挂在公网，你也可以挂在pastebin(https://pastebin.com) 或者Github上，或者你也可以本地起一个http服务，然后输入网址链接即可编译
-
-![image](https://user-images.githubusercontent.com/89376703/165304429-a801191f-3334-429f-80c4-27d74d475224.png)
-## 有两种PowerShell的打包方式
-![image](https://user-images.githubusercontent.com/89376703/166095301-609fd76b-3e8d-4330-a04e-59de4f8b9f6d.png)
-
-## 第一种
-![image](https://user-images.githubusercontent.com/89376703/166095373-50b4ccf3-1427-4522-b028-22ad57282c4b.png)
-## 注意第二种需要加一个ico格式的图标，将该图标放到同目录的文件夹下即可
-![image](https://user-images.githubusercontent.com/89376703/166095433-528c3d77-86d0-47c4-9a41-bb0d978b96fd.png)
+该工具集成了C/C++ 、C# 、nim 、PowerShell的免杀加载器
 
 
-# 免杀效果：
 
-### Karpersky
-#### 仅弹计算器作演示，lsass dump暂时不考虑
-![image](https://user-images.githubusercontent.com/89376703/165305458-d4a074d6-5adb-4cc6-9996-5d32abdc0b21.png)
 
-### Windows Defender(win 2016)
-![image](https://user-images.githubusercontent.com/89376703/165306383-b304bce6-1911-4671-8777-36557f06f0f8.png)
 
-# 提示：
-## 1.不要上传任何包括但不仅限于VirusTotal的公网沙箱，如果我发现样本失效过快，会停止该项目的维护
-## 2.此项目仅用于教育目的，禁止将该技术用于非法途径
+## 0x01.更新
+
+[+]2022-4-27：
+
+加载模块nim、powershell，免杀卡巴斯基，windows defender ，360，火绒
+
+[+]2022-5-18:
+
+添加C/C++加载模块，可免杀windows defender 、360、火绒
+
+[+]2022-6-3改动：
+
+删除了nim加载模块，添加了Csharp加载模块（降低了免杀的效果）
+
+解决了csharp的版本兼容性（可以同时在win7、服务器win2008以上的windows版本同时运行）
+
+
+
+## 0x02.环境配置
+
+运行环境：windows10
+
+C/C++编译环境，安装mingw，GCC/G++编译器
+
+如果要使用Nim Lang的套接字还是需要安装Nim环境和Winim的第三方库
+
+
+
+## 0x03.效果图：
+
+### C/C++
+
+![image-20220603115546523](https://user-images.githubusercontent.com/89376703/171785352-ef3ef6eb-3d7f-4e4a-89e5-85c34b757730.png)
+
+![image-20220603115649027](https://user-images.githubusercontent.com/89376703/171785644-f5698bbe-7338-4286-adff-15d81f145a09.png)
+
+
+![image-20220603115953626](https://user-images.githubusercontent.com/89376703/171785670-32590cff-2366-4ed2-97d6-00c75848ca36.png)
+
+
+### Csharp
+
+用CobaltStrike/MSF生成一个StagerLess的PowerShell脚本，用Base64加密解密一下脚本，或者用Obfuscation去混淆一下，将powershell脚本作分离处理
+
+![image-20220603120218705](https://user-images.githubusercontent.com/89376703/171785685-08b2e011-18c0-449b-b7c1-d2823e002aa5.png)
+
+将分离过的网址填入即可。（这边需要填一下.NET的版本，问题不大）
+![image-20220603120218705](https://user-images.githubusercontent.com/89376703/171785748-ee462a2b-c733-4708-82bd-1dab18905e51.png)
+
+
+
+
+
+### Powershell的加载器也是一样的操作
+
+
+
+## 0x04.注释
+
+新版本的加载器降低了免杀的效果，但是过国内、微软还是轻轻松松的
+
+[!]注意：不要将免杀样本上传至VT、微步等公网沙箱，这些都是样本收集中心他们会无情地向安全厂商分享样本以此牟利，如果样本失效过快，我将会停止该项目的更新
+
+
+## 此项目仅用于教育目的，禁止将该技术用于非法途径
+
+
+## 0x05.付费版免杀框架
+
+拥有更多免杀模块，更多的功能，免杀更多的杀软，支持多语言远控FUD加密
+![image-20220603121239074](https://user-images.githubusercontent.com/89376703/171785705-b2f17c5e-aec8-4d16-99a2-b6a46c51cd49.png)
+
+![image-20220603121257597](https://user-images.githubusercontent.com/89376703/171785718-a10306e0-2793-4b75-950e-faef1743a4bb.png)
+
+
+
+## 0x06.学习独家免杀技巧
+视频教程:https://www.bilibili.com/video/BV1HS4y1a7gu/
+我的个人学习频道:Blibli搜索 我不是格林
 
 # +知识星球学习免杀:
 
