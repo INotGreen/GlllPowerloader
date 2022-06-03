@@ -6,33 +6,6 @@ import sys, os
 from time import sleep
 
 
-raw_stub = """
-                      ___   _   _       _      ____
- |_ _| | \ | | ___ | |_   / ___|_ __ ___  ___ _ __
-  | |  |  \| |/ _ \| __| | |  _| '__/ _ \/ _ \ '_ \
-  | |  | |\  | (_) | |_  | |_| | | |  __/  __/ | | |
- |___| |_| \_|\___/ \__|  \____|_|  \___|\___|_| |_|
-
-usage: loader.py [-h] [-p explorer.exe] [-m QueueUserAPC] [-nr] [-v] [-d] [-o Green.exe] file
-
-基于syswhispers的shellcode加载器
-positional arguments:
-  file                  包含raw格式的shellcode格式文件
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -p explorer.exe, --process explorer.exe
-                        注入的进程(默认: explorer.exe)
-  -m QueueUserAPC, --method QueueUserAPC
-                        shellcode注入模式(Options: ProcessHollow, QueueUserAPC, RemoteThreadContext,
-                        RemoteThreadSuspended, CurrentThread) (默认: QueueUserAPC)
-  -nr, --no-randomize   禁用系统调用名称随机化
-  -v, --verbose         执行时启用调试消息
-  -d, --dll-sandbox     通过加载的 DLL 枚举逃避沙箱
-  -o Green.exe, --outfile Green.exe
-                        编译文件名
-"""
-
 graphical = """
 ####    ##    ##  #######  ########     ######   ########  ######## ######## ##    ## 
  ##     ###   ## ##     ##    ##       ##    ##  ##     ## ##       ##       ###   ## 
@@ -51,7 +24,7 @@ Option_stub = """
 | '--'M|| '--'O|| '--'R|| '--'E| ((1)) '--'O|| '--'P|| '--'T|| '--'I|| '--'O|| '--'N|| '--'S|
 `------'`------'`------'`------'  '-'`------'`------'`------'`------'`------'`------'`------'
  bilibli:我不是格林
- Github:https://github.com/INotGreen/Gllllnimloader
+ Github:https://github.com/INotGreen/Gllloader
  
  1.免杀加载器(Bypass Loader)
  2.文件格式转换(File Format Conversion)
