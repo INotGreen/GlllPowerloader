@@ -28,7 +28,7 @@
 
 运行环境：windows10
 
-C/C++编译环境，安装mingw，GCC/G++编译器
+C/C++编译环境，安装mingw，GCC/G++编译器,windows10自带C#编译器csc.exe
 
 如果要使用Nim Lang的套接字还是需要安装Nim环境和Winim的第三方库
 
