@@ -46,6 +46,15 @@
 
 ## 0x03.工具介绍
 
+启动程序
+
+```
+python.exe .\Gllloader.py
+```
+
+![image](https://user-images.githubusercontent.com/89376703/172190784-8a87774b-ce88-484d-93d5-936e922b16dc.png)
+
+
 ### 该工具shellcode加载模块目前有7种加载方式，C/C++五种。
 
 ### PowerShell和C#各一种，并且采用分离的方式进行加载。
