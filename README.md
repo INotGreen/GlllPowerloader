@@ -3,14 +3,11 @@
 该工具集成了C/C++ 、C# 、nim 、PowerShell的免杀加载器
 
 
-
-
-
 ## 0x01.更新
 
 [+]2022-4-27：
 
-加载模块nim、powershell，免杀卡巴斯基，windows defender ，360，火绒
+加载模块nim、powershell，可免杀卡巴斯基，windows defender ，360，火绒
 
 [+]2022-5-18:
 
@@ -18,9 +15,11 @@
 
 [+]2022-6-3改动：
 
-删除了nim加载模块，添加了Csharp加载模块（降低了免杀的效果）
+1.添加了文件格式转换模块，并且ps1转vbs、ps1转exe皆可绕过windows defender
 
-解决了csharp的版本兼容性（可以同时在win7、服务器win2008以上的windows版本同时运行）
+2.删除了nim加载模块，添加了Csharp加载模块（降低了免杀的效果）
+
+3.解决了csharp的版本兼容性（可以同时在win7、服务器win2008以上的windows版本同时运行）
 
 
 
@@ -28,11 +27,31 @@
 
 运行环境：windows10
 
-C/C++编译环境，安装mingw，GCC/G++编译器,windows10自带C#编译器csc.exe
+C/C++编译环境，安装mingw，GCC/G++编译器，并且配置环境变量
 
-如果要使用Nim Lang的套接字还是需要安装Nim环境和Winim的第三方库
+输入G++,GCC 出现以下情况说明环境安装成功
+
+![image](https://user-images.githubusercontent.com/89376703/172179649-32d3ba7d-c48b-4098-b58f-6154d2c312bf.png)
+
+C#编译环境：Windows自带C#编译器（csc.exe）
+
+Nim编译环境：如果要使用Nim Lang的套接字还是需要安装Nim环境和Winim的第三方库，最后配置环境变量
+输入nim -version查看是否安装成功
+
+![image](https://user-images.githubusercontent.com/89376703/172186202-d8d2127c-d834-4bc3-8644-e8a87df14064.png)
 
 
+## 工具介绍
+### 
+### 该工具shellcode加载模块目前有7种加载方式，C/C++五种。
+
+### PowerShell和C#各一种，并且采用分离的方式进行加载。
+
+![image](https://user-images.githubusercontent.com/89376703/172180872-f2c7204b-e5ed-47c7-a0f3-9ff5e3ed6e8d.png)
+
+C/C++加载器特点:随机化系统调用函数名称和XOR动态密钥使得每次生成的二进制文件硬编码数据不同，让杀软难以捕获特征。
+
+Powershell和C#shellcode加载特点:AMSI内存初始化失败，绕过AMSI的runtime和scantime后记载二进制文件以防止杀软对恶意进程的系统监控
 
 ## 0x03.效果图：
 
