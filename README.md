@@ -1,4 +1,4 @@
-介绍：
+## 说明：
 
 该工具集成了C/C++ 、C# 、nim 、PowerShell的免杀加载器
 
@@ -7,11 +7,13 @@
 
 [+]2022-4-27：
 
-加载模块nim、powershell，可免杀卡巴斯基，windows defender ，360，火绒
+加载模块:nim、powershell，可免杀卡巴斯基，windows defender ，360，火绒
 
 [+]2022-5-18:
 
-添加C/C++加载模块，可免杀windows defender 、360、火绒
+1.添加C/C++加载模块，可免杀windows defender 、360、火绒
+
+2.添加了套接字模块，Nim socket实现跨平台，并且免杀主流杀软
 
 [+]2022-6-3改动：
 
@@ -27,33 +29,38 @@
 
 运行环境：windows10
 
-C/C++编译环境，安装mingw，GCC/G++编译器，并且配置环境变量
+1.C/C++编译环境: 安装mingw，GCC/G++编译器，并且配置环境变量
 
 输入G++,GCC 出现以下情况说明环境安装成功
 
 ![image](https://user-images.githubusercontent.com/89376703/172179649-32d3ba7d-c48b-4098-b58f-6154d2c312bf.png)
 
-C#编译环境：Windows自带C#编译器（csc.exe）
+2.C#编译环境: Windows自带C#编译器（csc.exe）
 
-Nim编译环境：如果要使用Nim Lang的套接字还是需要安装Nim环境和Winim的第三方库，最后配置环境变量
+3.Nim编译环境: 如果要使用Nim Lang的套接字还是需要安装Nim环境和Winim的第三方库，最后配置环境变量
+
 输入nim -version查看是否安装成功
 
 ![image](https://user-images.githubusercontent.com/89376703/172186202-d8d2127c-d834-4bc3-8644-e8a87df14064.png)
 
 
-## 工具介绍
-### 
+## 0x03.工具介绍
+
 ### 该工具shellcode加载模块目前有7种加载方式，C/C++五种。
 
 ### PowerShell和C#各一种，并且采用分离的方式进行加载。
 
 ![image](https://user-images.githubusercontent.com/89376703/172180872-f2c7204b-e5ed-47c7-a0f3-9ff5e3ed6e8d.png)
 
-C/C++加载器特点:随机化系统调用函数名称和XOR动态密钥使得每次生成的二进制文件硬编码数据不同，让杀软难以捕获特征。
+1.C/C++加载器特点:随机化系统调用函数名称和XOR动态密钥使得每次生成的二进制文件硬编码数据不同，让杀软难以捕获特征。
 
-Powershell和C#shellcode加载特点:AMSI内存初始化失败，绕过AMSI的runtime和scantime后记载二进制文件以防止杀软对恶意进程的系统监控
+2.Powershell和C#shellcode加载特点:AMSI内存初始化失败，绕过AMSI的runtime和scantime后记载二进制文件以防止杀软对恶意进程的系统监控
 
-## 0x03.效果图：
+3.文件转换格式的使用方式也是大同小异，都是将powershellbase64加密解密然后分离，最后输入网址即可自动化生成VBS和exe文件
+
+4.套接字模块，输入IP和端口即可自动化生成文件，这里生成Nim的套接字是跨平台的可以在任意的windows、Linux、unix上运行
+
+## 0x04.效果图：
 
 ### C/C++
 
@@ -76,13 +83,11 @@ Powershell和C#shellcode加载特点:AMSI内存初始化失败，绕过AMSI的ru
 
 
 
-
-
 ### Powershell的加载器也是一样的操作
 
 
 
-## 0x04.注释
+## 0x05.注释
 
 新版本的加载器降低了免杀的效果，但是过国内、微软还是轻轻松松的
 
@@ -92,7 +97,7 @@ Powershell和C#shellcode加载特点:AMSI内存初始化失败，绕过AMSI的ru
 ## 此项目仅用于教育目的，禁止将该技术用于非法途径
 
 
-## 0x05.付费版免杀框架
+## 0x06.付费版免杀框架
 
 拥有更多免杀模块，更多的功能，免杀更多的杀软，支持多语言远控FUD加密
 ![image-20220603121239074](https://user-images.githubusercontent.com/89376703/171785705-b2f17c5e-aec8-4d16-99a2-b6a46c51cd49.png)
@@ -101,7 +106,7 @@ Powershell和C#shellcode加载特点:AMSI内存初始化失败，绕过AMSI的ru
 
 
 
-## 0x06.学习独家免杀技巧
+## 0x07.学习独家免杀技巧
 视频教程:https://www.bilibili.com/video/BV1HS4y1a7gu/
 我的个人学习频道:Blibli搜索 我不是格林
 
