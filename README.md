@@ -125,9 +125,14 @@ python.exe .\Gllloader.py
 
 # 参考
 Jthuraisamy 的SysWhispers：https ://github.com/jthuraisamy/SysWhispers
+
 OutFlank 用于创建 InlineWhispers（Mingw-w64 兼容 SysWhispers）：https ://github.com/outflanknl/InlineWhispers
+
 FalconForceTeam 支持 SysWhispers2 的系统调用生成工具：https ://github.com/FalconForceTeam/SysWhispers2BOF
+
 Snovvcrash 用于他们的 NimHollow 项目，我将其用作流程空心化的模板：https ://github.com/snovvcrash/NimHollow
+
 Snovvcrash 我将其用作许多包含的注入技术的模板：https ://github.com/snovvcrash/DInjector
+
 
 
