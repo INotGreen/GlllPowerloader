@@ -72,7 +72,7 @@ python.exe .\Gllloader.py
 ## 0x04.效果图：
 
 ### C/C++
-
+注意这里请使用stageless的shellcode(beacon.bin)
 ![image-20220603115546523](https://user-images.githubusercontent.com/89376703/171785352-ef3ef6eb-3d7f-4e4a-89e5-85c34b757730.png)
 
 ![image-20220603115649027](https://user-images.githubusercontent.com/89376703/171785644-f5698bbe-7338-4286-adff-15d81f145a09.png)
