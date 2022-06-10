@@ -127,6 +127,8 @@ python.exe .\Gllloader.py
 视频教程:https://www.bilibili.com/video/BV1HS4y1a7gu/
 我的个人学习频道:Blibli搜索 我不是格林
 
+qq:1691587386
+
 # +知识星球学习免杀:
 
 ![image](https://user-images.githubusercontent.com/89376703/165324647-52f42926-cd0f-4da6-91cb-73bceffd5224.png)
