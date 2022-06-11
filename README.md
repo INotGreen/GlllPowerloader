@@ -139,11 +139,7 @@ IEX $Decryption
 
 qq:1691587386 ，标明你的来意。
 
-# +知识星球学习免杀:
 
-自学免杀或者想获取学习资料的推荐+
-
-![image](https://user-images.githubusercontent.com/89376703/165324647-52f42926-cd0f-4da6-91cb-73bceffd5224.png)
 
 # 参考
 Jthuraisamy 的SysWhispers：https ://github.com/jthuraisamy/SysWhispers
