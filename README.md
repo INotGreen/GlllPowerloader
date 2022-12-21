@@ -320,9 +320,11 @@ out ..\payload1.ps1
 
 ### 3.powershell图片隐写术
 
+这个项目最初来源于：https://github.com/peewpw/Invoke-PSImage
 
+我对它进行了修改，并且绕过Windows Defender
 
-
+您只需要选择powershell脚本即可，全程自动化非常舒服
 
 
 
@@ -337,13 +339,18 @@ out ..\payload1.ps1
 
 
 
-
 # 5.免责声明
 
 该工具仅用于网络安全教育和研究，禁止用于非法途径，我对您由使用或传播等由此软件引起的任何行为和/或损害不承担任何责任。您对使用此软件的任何行为承担全部责任，并承认此软件仅用于教育和研究目的。下载本软件或软件的源代码，您自动同意上述内容。
 
 # 6.结语
 
-在编写Powerloader时学习了很多前辈的项目，在此我非常感谢它们@
+在编写Powerloader时学习了很多前辈的项目，在此我非常感谢它们
 
-关于C/C++的加载器非常感谢：https://github.com/icyguider/Shhhloader，我参考了它的部分代码和框架格式，这非常有意义
+关于C/C++的加载器 ，我参考了它的部分代码和框架格式，这非常有意义：https://github.com/icyguider/Shhhloader，
+
+还有Nim惊人的项目：https://github.com/byt3bl33d3r/OffensiveNim
+
+感谢：https://github.com/danielbohannon/Invoke-DOSfuscation
+
+https://github.com/peewpw/Invoke-PSImage
