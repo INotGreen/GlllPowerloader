@@ -182,10 +182,10 @@ Nim Socket这是我很早之前的项目：https://github.com/INotGreen/Nim-Lang
 
 直到现在我仍然相信它可以Bypass kaspersky
 
-<video id="video" controls=""src="https://user-images.githubusercontent.com/89376703/208883213-f0bfab92-efa3-491f-961d-717eb4322104.mp4" preload="none">
 
 
 
+<video src="https://user-images.githubusercontent.com/79864975/183701072-33ca68a2-74cd-435b-9069-745062e308e6.mp4](https://user-images.githubusercontent.com/89376703/208883213-f0bfab92-efa3-491f-961d-717eb4322104.mp4"></video>
 
 
 
@@ -212,9 +212,9 @@ Nim Socket这是我很早之前的项目：https://github.com/INotGreen/Nim-Lang
 
 ## 0x09.shellcode加密解密
 
-<video id="video" controls=""src="https://user-images.githubusercontent.com/89376703/208888479-17ac64fc-ae84-43be-9b5b-27f182dce58c.mp4" preload="none">
 
 
+<video src="https://user-images.githubusercontent.com/89376703/208888479-17ac64fc-ae84-43be-9b5b-27f182dce58c.mp4"></video>
 
 
 ## 0x10.Nim自动化嵌入宏代码
@@ -255,9 +255,8 @@ End Function
 
 这仅是一段远程下载文件的VBA代码，本质上并没有什么恶意，但是黑客们可以利用它们在office中下载恶意软件，这极大增加了安全隐患，因此，防病毒软件对此很敏感。您在选择文件时必须选择一个经过FUD(免杀)处理的二进制文件，否则在上传时会被检测为病毒，在文件落地时也会被defender检测为恶意软件。我并不能保证它可以完全绕过Microsoft Defender以外的防病毒，这只是一个用来学习测试的项目。
 
-<video id="video" controls=""src="https://user-images.githubusercontent.com/89376703/208883483-577d3038-9329-49a2-ae60-94a733545896.mp4" preload="none">
 
-
+<video src="https://user-images.githubusercontent.com/89376703/208883483-577d3038-9329-49a2-ae60-94a733545896.mp4"></video>
 
 ## 0x11.脚本命令混淆
 
