@@ -95,7 +95,7 @@ Powerloader运行还需要python3的编程环境，您需要去官网下载它�
 如果您在windows中安装了Git，就可以这样使用：
 
 ```
-git clone https://github.com/INotGreen/Gllloader.git
+git clone https://github.com/INotGreen/GlllPowerloader.git
 cd GlllPowerLoader-master
 pip install -r requirements.txt
 start.bat
