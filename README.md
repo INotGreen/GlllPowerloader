@@ -194,7 +194,7 @@ Nim Socket这是我很早之前的项目：https://github.com/INotGreen/Nim-Lang
 
 ![image-20221220135231101](Image/image-20221220135231101.png)
 
-原谅我的懒惰，这只是一个剪切板，用来记录不同powershell执行的命令，这里我只是给了几个例子，您可以在Stub\Get_Credentials.ps1中添加您经常使用的powershell命令，您们也可以在这里下载源代码：https://github.com/INotGreen/Invoke-SharpOffensive
+原谅我的懒惰，这只是一个剪切板，用来记录不同powershell执行的命令，这里我只是给了几个例子，您可以在Stub\Get_Credentials.ps1中添加您经常使用的powershell命令，可以在这里下载源代码：https://github.com/INotGreen/Invoke-SharpOffensive
 
 
 
