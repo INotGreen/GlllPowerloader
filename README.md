@@ -330,7 +330,7 @@ out ..\payload1.ps1
 
 # 4.更新
 
-[+] 2022年12.20，Powerloader发布
+[+] 2022年12.21，Powerloader发布
 
 
 
