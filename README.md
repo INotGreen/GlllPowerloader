@@ -24,11 +24,7 @@
 
 # 1.前言
 
-* 许多内网场景或处于红队评估的渗透测试工作中经常会遇到各种AV/EDR，此前我已经在工作中编写了大量的Shellcode loader用于绕过防病毒，由于每次使用时需要编译二进制文件，频繁地打开臃肿的IDE已经让我疲惫不堪，因此我想编写一个自动化工具来快速并且批量地编译二进制文件，旨在提升工作效率。为方便框架中C#、powershell代码的自动化，目前Powerloader只支持windwos平台，您需要根据所在windows系统版本选择不同的.NET Framework版本
-
 * 不要上传Virus total相关的在线沙箱平台，请下载相关的AV/EDR去测试它们的可靠性
-
-* 不要语言攻击我，这只是一个公益学习项目
 
 * 视频讲解：https://www.bilibili.com/video/BV1RK411z7XA/  欢迎点赞关注
 
