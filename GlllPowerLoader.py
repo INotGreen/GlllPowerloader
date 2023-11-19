@@ -706,13 +706,9 @@ def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_op
                       "*                                          *\n"
                       "| 3.exe_to_ps1                             |\n"
                       "*                                          *\n"
-                      "| 4.ps1_to_exe                             |\n"
+                      "| 4.base64_to_shellcode(hex)               |\n"
                       "*                                          *\n"
-                      "| 5.exe_to_bin                             |\n"
-                      "*                                          *\n"
-                      "| 6.base64_to_shellcode(hex)               |\n"
-                      "*                                          *\n"
-                      "| 7.ps1_to_vbs(stageless)                  |\n"
+                      "| 5.ps1_to_vbs(stageless)                  |\n"
                       "+----------+----+--------------------------+\n")
                                 
                 formatopions = input(DAZZLINGCOLORS.OKGREEN + INOTGREEN)

