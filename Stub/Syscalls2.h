@@ -102,7 +102,7 @@ typedef struct _PS_ATTRIBUTE_LIST
 	PS_ATTRIBUTE Attributes[1];
 } PS_ATTRIBUTE_LIST, *PPS_ATTRIBUTE_LIST;
 
-EXTERN_C NTSTATUS ULCOyxxuXpdHFQpIRaq(
+EXTERN_C NTSTATUS nWXWxhRbGXBXnbxlpxm(
 	IN HANDLE ProcessHandle,
 	IN PROCESSINFOCLASS ProcessInformationClass,
 	OUT PVOID ProcessInformation,
@@ -110,41 +110,41 @@ EXTERN_C NTSTATUS ULCOyxxuXpdHFQpIRaq(
 	OUT PULONG ReturnLength OPTIONAL
 	);
 
-EXTERN_C NTSTATUS VBWZrKsBoLvypfMdGiY(
+EXTERN_C NTSTATUS eYLTlXHvvcMYdyylUhA(
 	IN HANDLE ProcessHandle,
 	IN PVOID BaseAddress OPTIONAL,
 	OUT PVOID Buffer,
 	IN SIZE_T BufferSize,
 	OUT PSIZE_T NumberOfBytesRead OPTIONAL);
 
-EXTERN_C NTSTATUS CFFWWXCicWwlMtUWPiq(
+EXTERN_C NTSTATUS uYatsTOjMgjXkFRdoql(
 	IN HANDLE ProcessHandle,
 	IN OUT PVOID * BaseAddress,
 	IN OUT PSIZE_T RegionSize,
 	IN ULONG NewProtect,
 	OUT PULONG OldProtect);
 
-EXTERN_C NTSTATUS dAcoeKoZfeQqefCKmfL(
+EXTERN_C NTSTATUS oCWsVVAkNOibiTLJsju(
 	IN HANDLE ProcessHandle,
 	IN PVOID BaseAddress,
 	IN PVOID Buffer,
 	IN SIZE_T NumberOfBytesToWrite,
 	OUT PSIZE_T NumberOfBytesWritten OPTIONAL);
 
-EXTERN_C NTSTATUS jSSHWODQCSfFvsqeybS(
+EXTERN_C NTSTATUS gHxczLXymOZaQSzUkVn(
 	IN HANDLE ThreadHandle,
 	IN OUT PULONG PreviousSuspendCount OPTIONAL);
 
-EXTERN_C NTSTATUS FJVRYUhESfdyyGqRcdB(
+EXTERN_C NTSTATUS zWIidnBvSBNNPYVUgRd(
 	IN HANDLE Handle);
 
-EXTERN_C NTSTATUS mzOHQwCHUQRVhBnajah(
+EXTERN_C NTSTATUS sQQGNAiKvsxgpWNODqr(
 	OUT PHANDLE ProcessHandle,
 	IN ACCESS_MASK DesiredAccess,
 	IN POBJECT_ATTRIBUTES ObjectAttributes,
 	IN PCLIENT_ID ClientId OPTIONAL);
 
-EXTERN_C NTSTATUS UWhhRtOqCgYZJITxsMU(
+EXTERN_C NTSTATUS uJbIWSuYtYQvTmGdznz(
 	IN HANDLE ProcessHandle,
 	IN OUT PVOID * BaseAddress,
 	IN ULONG ZeroBits,
@@ -152,7 +152,7 @@ EXTERN_C NTSTATUS UWhhRtOqCgYZJITxsMU(
 	IN ULONG AllocationType,
 	IN ULONG Protect);
 
-EXTERN_C NTSTATUS ZVRWCfQPkXiwKuPFjgH(
+EXTERN_C NTSTATUS yyNScZpQCpLnXLcmJgX(
 	OUT PHANDLE ThreadHandle,
 	IN ACCESS_MASK DesiredAccess,
 	IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
@@ -165,31 +165,31 @@ EXTERN_C NTSTATUS ZVRWCfQPkXiwKuPFjgH(
 	IN SIZE_T MaximumStackSize,
 	IN PPS_ATTRIBUTE_LIST AttributeList OPTIONAL);
 
-EXTERN_C NTSTATUS LQBeZBYzDauPrjOanHc(
+EXTERN_C NTSTATUS iqjPMbtbOqQXaEsADJn(
 	IN HANDLE ObjectHandle,
 	IN BOOLEAN Alertable,
 	IN PLARGE_INTEGER TimeOut OPTIONAL);
 
-EXTERN_C NTSTATUS YfGtvOYIRHKzAOnLqav(
+EXTERN_C NTSTATUS dGEGALuwnOzWPZODTho(
 	IN HANDLE ThreadHandle,
 	IN PKNORMAL_ROUTINE ApcRoutine,
 	IN PVOID ApcArgument1 OPTIONAL,
 	IN PVOID ApcArgument2 OPTIONAL,
 	IN PVOID ApcArgument3 OPTIONAL);
 
-EXTERN_C NTSTATUS RsXhGZjxZmeWQCaSxOu(
+EXTERN_C NTSTATUS ZmOEONVpnYkyYVGpMEv(
 	IN HANDLE ThreadHandle,
 	OUT PULONG PreviousSuspendCount OPTIONAL);
 
-EXTERN_C NTSTATUS genWXXsNrMcFXonIght(
+EXTERN_C NTSTATUS dQhlpKdDpMBXLlTtpKV(
 	IN HANDLE ThreadHandle,
 	IN OUT PCONTEXT ThreadContext);
 
-EXTERN_C NTSTATUS wzMUOQSewVTFxzpskuU(
+EXTERN_C NTSTATUS LkhUpnxwzeemrFHdODq(
 	IN HANDLE ThreadHandle,
 	IN PCONTEXT Context);
 
-EXTERN_C NTSTATUS ZEubHuHMOhdvsCxCdzn(
+EXTERN_C NTSTATUS tTjYianRVEsfAEADbHu(
 	IN BOOLEAN Alertable,
 	IN PLARGE_INTEGER DelayInterval);
 
@@ -314,8 +314,8 @@ EXTERN_C DWORD GETSYSCALLNUMBER(DWORD FunctionHash)
 
     return -1;
 }
-#define ULCOyxxuXpdHFQpIRaq ULCOyxxuXpdHFQpIRaq
-__asm__("ULCOyxxuXpdHFQpIRaq: \n\
+#define nWXWxhRbGXBXnbxlpxm nWXWxhRbGXBXnbxlpxm
+__asm__("nWXWxhRbGXBXnbxlpxm: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -335,8 +335,8 @@ __asm__("ULCOyxxuXpdHFQpIRaq: \n\
 	syscall\n\
 	ret\n\
 ");
-#define VBWZrKsBoLvypfMdGiY VBWZrKsBoLvypfMdGiY
-__asm__("VBWZrKsBoLvypfMdGiY: \n\
+#define eYLTlXHvvcMYdyylUhA eYLTlXHvvcMYdyylUhA
+__asm__("eYLTlXHvvcMYdyylUhA: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -356,8 +356,8 @@ __asm__("VBWZrKsBoLvypfMdGiY: \n\
 	syscall\n\
 	ret\n\
 ");
-#define CFFWWXCicWwlMtUWPiq CFFWWXCicWwlMtUWPiq
-__asm__("CFFWWXCicWwlMtUWPiq: \n\
+#define uYatsTOjMgjXkFRdoql uYatsTOjMgjXkFRdoql
+__asm__("uYatsTOjMgjXkFRdoql: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -380,8 +380,8 @@ __asm__("CFFWWXCicWwlMtUWPiq: \n\
 	syscall\n\
 	ret\n\
 ");
-#define dAcoeKoZfeQqefCKmfL dAcoeKoZfeQqefCKmfL
-__asm__("dAcoeKoZfeQqefCKmfL: \n\
+#define oCWsVVAkNOibiTLJsju oCWsVVAkNOibiTLJsju
+__asm__("oCWsVVAkNOibiTLJsju: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -398,8 +398,8 @@ __asm__("dAcoeKoZfeQqefCKmfL: \n\
 	syscall\n\
 	ret\n\
 ");
-#define jSSHWODQCSfFvsqeybS jSSHWODQCSfFvsqeybS
-__asm__("jSSHWODQCSfFvsqeybS: \n\
+#define gHxczLXymOZaQSzUkVn gHxczLXymOZaQSzUkVn
+__asm__("gHxczLXymOZaQSzUkVn: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -416,8 +416,8 @@ __asm__("jSSHWODQCSfFvsqeybS: \n\
 	syscall\n\
 	ret\n\
 ");
-#define FJVRYUhESfdyyGqRcdB FJVRYUhESfdyyGqRcdB
-__asm__("FJVRYUhESfdyyGqRcdB: \n\
+#define zWIidnBvSBNNPYVUgRd zWIidnBvSBNNPYVUgRd
+__asm__("zWIidnBvSBNNPYVUgRd: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -434,8 +434,8 @@ __asm__("FJVRYUhESfdyyGqRcdB: \n\
 	syscall\n\
 	ret\n\
 ");
-#define mzOHQwCHUQRVhBnajah mzOHQwCHUQRVhBnajah
-__asm__("mzOHQwCHUQRVhBnajah: \n\
+#define sQQGNAiKvsxgpWNODqr sQQGNAiKvsxgpWNODqr
+__asm__("sQQGNAiKvsxgpWNODqr: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -455,8 +455,8 @@ __asm__("mzOHQwCHUQRVhBnajah: \n\
 	syscall\n\
 	ret\n\
 ");
-#define UWhhRtOqCgYZJITxsMU UWhhRtOqCgYZJITxsMU
-__asm__("UWhhRtOqCgYZJITxsMU: \n\
+#define uJbIWSuYtYQvTmGdznz uJbIWSuYtYQvTmGdznz
+__asm__("uJbIWSuYtYQvTmGdznz: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -479,8 +479,8 @@ __asm__("UWhhRtOqCgYZJITxsMU: \n\
 	syscall\n\
 	ret\n\
 ");
-#define ZVRWCfQPkXiwKuPFjgH ZVRWCfQPkXiwKuPFjgH
-__asm__("ZVRWCfQPkXiwKuPFjgH: \n\
+#define yyNScZpQCpLnXLcmJgX yyNScZpQCpLnXLcmJgX
+__asm__("yyNScZpQCpLnXLcmJgX: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -501,8 +501,8 @@ __asm__("ZVRWCfQPkXiwKuPFjgH: \n\
 	syscall\n\
 	ret\n\
 ");
-#define LQBeZBYzDauPrjOanHc LQBeZBYzDauPrjOanHc
-__asm__("LQBeZBYzDauPrjOanHc: \n\
+#define iqjPMbtbOqQXaEsADJn iqjPMbtbOqQXaEsADJn
+__asm__("iqjPMbtbOqQXaEsADJn: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -523,8 +523,8 @@ __asm__("LQBeZBYzDauPrjOanHc: \n\
 	syscall\n\
 	ret\n\
 ");
-#define YfGtvOYIRHKzAOnLqav YfGtvOYIRHKzAOnLqav
-__asm__("YfGtvOYIRHKzAOnLqav: \n\
+#define dGEGALuwnOzWPZODTho dGEGALuwnOzWPZODTho
+__asm__("dGEGALuwnOzWPZODTho: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -547,8 +547,8 @@ __asm__("YfGtvOYIRHKzAOnLqav: \n\
 	syscall\n\
 	ret\n\
 ");
-#define RsXhGZjxZmeWQCaSxOu RsXhGZjxZmeWQCaSxOu
-__asm__("RsXhGZjxZmeWQCaSxOu: \n\
+#define ZmOEONVpnYkyYVGpMEv ZmOEONVpnYkyYVGpMEv
+__asm__("ZmOEONVpnYkyYVGpMEv: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -569,8 +569,8 @@ __asm__("RsXhGZjxZmeWQCaSxOu: \n\
 	syscall\n\
 	ret\n\
 ");
-#define genWXXsNrMcFXonIght genWXXsNrMcFXonIght
-__asm__("genWXXsNrMcFXonIght: \n\
+#define dQhlpKdDpMBXLlTtpKV dQhlpKdDpMBXLlTtpKV
+__asm__("dQhlpKdDpMBXLlTtpKV: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -593,8 +593,8 @@ __asm__("genWXXsNrMcFXonIght: \n\
 	syscall\n\
 	ret\n\
 ");
-#define wzMUOQSewVTFxzpskuU wzMUOQSewVTFxzpskuU
-__asm__("wzMUOQSewVTFxzpskuU: \n\
+#define LkhUpnxwzeemrFHdODq LkhUpnxwzeemrFHdODq
+__asm__("LkhUpnxwzeemrFHdODq: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\
@@ -617,8 +617,8 @@ __asm__("wzMUOQSewVTFxzpskuU: \n\
 	syscall\n\
 	ret\n\
 ");
-#define ZEubHuHMOhdvsCxCdzn ZEubHuHMOhdvsCxCdzn
-__asm__("ZEubHuHMOhdvsCxCdzn: \n\
+#define tTjYianRVEsfAEADbHu tTjYianRVEsfAEADbHu
+__asm__("tTjYianRVEsfAEADbHu: \n\
 	mov [rsp +8], rcx\n\
 	mov [rsp+16], rdx\n\
 	mov [rsp+24], r8\n\

