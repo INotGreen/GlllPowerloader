@@ -1,11 +1,10 @@
 # GlllPowerloader
-
 - [GlllPowerloader](#glllpowerloader)
 - [1.前言](#1前言)
 - [2.功能](#2功能)
 - [3.使用](#3使用)
   - [0x01.环境安装](#0x01环境安装)
-  - [0x02.shellcode loader的使用](#0x02shellcode-loader的使用)
+  - [0x02.使用方法](#0x02使用方法)
   - [0x03.视频演示](#0x03视频演示)
 - [4.更新](#4更新)
 - [5.免责声明](#5免责声明)
