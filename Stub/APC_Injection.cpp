@@ -14,7 +14,7 @@ typedef std::string String;
 typedef std::wstring String;
 #endif
 
-#define size 1024 * 60
+#define size 1024 * 1024
 unsigned char Buffer[size];
 
 unsigned int Buffer_len = sizeof(Buffer);
